@@ -1,0 +1,39 @@
+<!-- templates/customers_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of All Users</title>
+</head>
+<body>
+    <h1>List of All Users</h1>
+
+    <h2>Customers</h2>
+    <ul>
+        {% for customer in customers %}
+            <li>{{ customer.user.username }} - {{ customer.phone }}</li>
+        {% empty %}
+            <li>No customers found.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Administrators</h2>
+    <ul>
+        {% for admin in administrator %}
+            <li>{{ admin.user.username }} - {{ admin.phone }}</li>
+        {% empty %}
+            <li>No administrators found.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Service Providers</h2>
+    <ul>
+        {% for provider in serviceProvider %}
+            <li>{{ provider.user.username }} - {{ provider.phone }}</li>
+        {% empty %}
+            <li>No service providers found.</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

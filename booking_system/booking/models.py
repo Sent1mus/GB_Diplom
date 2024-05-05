@@ -2,26 +2,34 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Administrator(models.Model):
+class BaseProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(max_length=20)
+
+    # Внутренний класс для настройки модели
+    class Meta:
+        abstract = True  # Указываем, что модель является абстрактной и не должна создаваться в базе данных
 
     def __str__(self):
         return self.user.username
 
 
-class ServiceProvider(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+class Administrator(BaseProfile):
+    pass
+
+    def __str__(self):
+        return f"Администратор: {self.user.username}, Телефон: {self.phone}"
+
+
+class ServiceProvider(BaseProfile):
     specialization = models.CharField(max_length=100)
-    phone = models.CharField(max_length=20)
 
     def __str__(self):
-        return f"{self.user.username} - {self.specialization}"
+        return f"Поставщик услуг: {self.user.username}, Специализация: {self.specialization}, Телефон: {self.phone}"
 
 
-class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.CharField(max_length=20)
+class Customer(BaseProfile):
+    pass
 
     def __str__(self):
-        return self.user.username
+        return f"Клиент: {self.user.username}, Телефон: {self.phone}"

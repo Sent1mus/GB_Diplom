@@ -1,0 +1,66 @@
+<!-- templates/customers_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of All Users</title>
+</head>
+<body>
+<h1>List of All Users</h1>
+
+<h2>Customers</h2>
+<ul>
+    {% for customer in customers %}
+    <li>{{ customer.user.username }} - {{ customer.phone }}</li>
+    {% empty %}
+    <li>No customers found.</li>
+    {% endfor %}
+</ul>
+
+<h2>Administrators</h2>
+<ul>
+    {% for admin in administrators %}
+    <li>{{ admin.user.username }} - {{ admin.phone }}</li>
+    {% empty %}
+    <li>No administrators found.</li>
+    {% endfor %}
+</ul>
+
+<h2>Service Providers</h2>
+<ul>
+    {% for provider in service_providers %}
+    <li>{{ provider.user.username }} - {{ provider.specialization }} - {{ provider.phone }}</li>
+    {% empty %}
+    <li>No service providers found.</li>
+    {% endfor %}
+</ul>
+
+<h2>Services</h2>
+<ul>
+    {% for service in services %}
+    <li>{{ service.name }} - {{ service.description }} - Duration: {{ service.duration }} - Price: ${{ service.price }}</li>
+    {% empty %}
+    <li>No services found.</li>
+    {% endfor %}
+</ul>
+
+<h2>Reviews</h2>
+<ul>
+    {% for review in reviews %}
+    <li>Review by {{ review.customer.user.username }} for {{ review.service.name }} provided by {{ review.service_provider.user.username }} - Rating: {{ review.rating }} - Comment: {{ review.comment }}</li>
+    {% empty %}
+    <li>No reviews found.</li>
+    {% endfor %}
+</ul>
+
+<h2>Bookings</h2>
+<ul>
+    {% for booking in bookings %}
+    <li>{{ booking.customer.user.username }} booked {{ booking.service.name }} with {{ booking.service_provider.user.username }} at {{ booking.appointment_time }}. Booking create at {{ booking.created_at  }}</li>
+    {% empty %}
+    <li>No bookings found.</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

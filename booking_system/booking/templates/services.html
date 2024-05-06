@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="services-container">
+    {% for service in services %}
+    <div class="service">
+        <h2>{{ service.name }}</h2>
+        <p>{{ service.description }}</p>
+        <p>Duration: {{ service.duration }}</p>
+        <p>Price: {{ service.price }}</p>
+        {% if user.is_authenticated %}
+        <button onclick="openBookingModal('{{ service.id }}')">Book</button>
+        {% endif %}
+    </div>
+    {% if forloop.counter|divisibleby:3 and not forloop.last %}
+    </div><div class="services-container">
+    {% endif %}
+    {% endfor %}
+</div>
+
+<!-- Booking Modal -->
+<div id="bookingModal" style="display:none;">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Confirm Booking</button>
+    </form>
+</div>
+
+<script>
+function openBookingModal(serviceId) {
+    // JavaScript to handle modal opening and setting serviceId dynamically
+    document.getElementById('bookingModal').style.display = 'block';
+}
+</script>
+{% endblock %}

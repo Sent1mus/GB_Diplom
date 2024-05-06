@@ -12,10 +12,10 @@ class Command(BaseCommand):
 
         for i in range(num_service_providers):
             # Create a user for each service provider
-            username = f'service{i}'
-            first_name = f'ServiceFirst{i}'
-            last_name = f'ServiceLast{i}'
-            email = f'service{i}@example.com'
+            username = f'master{i}'
+            first_name = f'MasterFirst{i}'
+            last_name = f'MasterLast{i}'
+            email = f'master{i}@example.com'
             password = 'password'  # You might want to generate a more secure password
             phone = f'7927333221{i}'
             specialization = f'Specialization{i}'

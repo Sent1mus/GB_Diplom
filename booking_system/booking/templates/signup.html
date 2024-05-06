@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Signup - Beauty Saloon{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <h1>Signup</h1>
+    <p>Create your account to book services and get exclusive offers.</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+</div>
+{% endblock %}

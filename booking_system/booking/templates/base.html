@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{% block title %}Beauty Saloon{% endblock %}</title>
+</head>
+<body>
+    <div class="nav-container">
+        <ul>
+            <li><a href="{% url 'main' %}" class="nav-link">Главная</a></li>
+            <li><a href="{% url 'about_us' %}" class="nav-link">О салоне</a></li>
+            <li><a href="{% url 'services' %}" class="nav-link">Наши услуги</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'profile' %}" class="nav-link">Профиль</a></li>
+            <li>
+                <a href="{% url 'logout' %}" class="nav-link">Выйти</a>
+            </li>
+            {% else %}
+            <li><a href="{% url 'signup' %}" class="nav-link">Регистрация</a></li>
+            <li><a href="{% url 'login' %}" class="nav-link">Войти</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    {% block content %}
+    {% endblock %}
+    <footer>
+        {% block footer %}
+        {% endblock %}
+    </footer>
+</body>
+</html>

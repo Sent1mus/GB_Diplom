@@ -8,6 +8,7 @@ class Command(BaseCommand):
         # Run makemigrations and migrate to ensure the database is up to date
         self.stdout.write(self.style.SUCCESS('Running makemigrations...'))
         call_command('makemigrations')
+        call_command('makemigrations', 'booking')
         self.stdout.write(self.style.SUCCESS('Running migrate...'))
         call_command('migrate')
         self.stdout.write(self.style.SUCCESS('Database migration completed.'))
@@ -26,3 +27,16 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS('Starting to fill service providers...'))
         call_command('fill_service_providers')
         self.stdout.write(self.style.SUCCESS('Finished filling service providers.'))
+
+        # Call fill_serviceproviders command
+        self.stdout.write(self.style.SUCCESS('Starting to fill services...'))
+        call_command('fill_services')
+        self.stdout.write(self.style.SUCCESS('Finished filling services.'))
+
+        self.stdout.write(self.style.SUCCESS('Starting to fill reviews...'))
+        call_command('fill_reviews')
+        self.stdout.write(self.style.SUCCESS('Finished filling reviews.'))
+
+        self.stdout.write(self.style.SUCCESS('Starting to fill bookings...'))
+        call_command('fill_bookings')
+        self.stdout.write(self.style.SUCCESS('Finished filling bookings.'))

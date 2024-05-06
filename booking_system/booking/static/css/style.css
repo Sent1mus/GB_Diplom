@@ -1,0 +1,82 @@
+/* Основные стили для всего тела документа */
+body {
+    margin: 0;
+    padding-top: 60px;
+    font-family: 'Fira Sans', sans-serif;
+    background-color: black;
+    color: #ccc;
+}
+
+/* Стили для контейнера навигации */
+.nav-container {
+    display: flex;
+    align-items: center; /* Vertically center the content */
+    justify-content: flex-end; /* Horizontally center the content */
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #161618; /* Grey background */
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Стили для списка в навигационном контейнере */
+.nav-container ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    display: flex;
+}
+
+/* Стили для ссылок, кнопок и форм в навигационном контейнере */
+.nav-container .nav-link, .nav-container .nav-button, .nav-container form {
+    text-decoration: none;
+    color: gold;
+    margin-left: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-flex; /* Ensures form is inline and items are aligned */
+    align-items: center; /* Center align the button vertically */
+}
+
+/* Стили для ссылок и форм при наведении */
+.nav-container .nav-link:hover, .nav-container .nav-button:hover, .nav-container form:hover {
+    color: white;
+    background-color: transparent; /* Background does not change on hover */
+}
+
+/* Центрирование кнопок в формах */
+.nav-container form {
+    display: flex;
+    align-items: center; /* Центрирование по вертикали */
+    justify-content: center; /* Центрирование по горизонтали */
+    margin: 0 20px; /* Горизонтальные отступы, как у других ссылок */
+    padding: 5px 10px; /* Отступы внутри, как у других ссылок */
+    width: auto; /* Автоматическая ширина по содержимому */
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.services-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.service {
+    width: 30%;
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px #ccc;
+}

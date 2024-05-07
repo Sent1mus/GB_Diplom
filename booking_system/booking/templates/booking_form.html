@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Book a Service</h1>
+    {% if not provider_form %}
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Select Date and Time</button>
+        </form>
+    {% else %}
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ provider_form.as_p }}
+            <button type="submit" class="btn btn-primary">Select Provider and Book</button>
+        </form>
+    {% endif %}
+</div>
+{% endblock %}

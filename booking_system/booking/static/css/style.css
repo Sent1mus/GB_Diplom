@@ -71,12 +71,17 @@ body {
 
 .services-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Занимает минимальную высоту во всю высоту видимой части экрана */
+    width: 100%; /* Занимает всю ширину контейнера */
 }
-.service {
-    width: 30%;
-    margin: 10px;
+
+.service-item {
+    margin: 20px;
     padding: 20px;
-    box-shadow: 0 0 10px #ccc;
+    border: 1px solid #ccc;
+    width: 80%; /* Процент может быть изменен в зависимости от предпочтений */
+    text-align: center; /* Центрирование текста внутри каждого блока услуги */
 }

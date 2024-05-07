@@ -12,8 +12,8 @@
             <li><a href="{% url 'main' %}" class="nav-link">Главная</a></li>
             <li><a href="{% url 'about_us' %}" class="nav-link">О салоне</a></li>
             <li><a href="{% url 'services' %}" class="nav-link">Наши услуги</a></li>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'profile' %}" class="nav-link">Профиль</a></li>
+            {% if request.user.is_authenticated %}
+            <li><a href="{% url 'user_profile' %}" class="nav-link">Профиль</a></li>
             <li>
                 <a href="{% url 'logout' %}" class="nav-link">Выйти</a>
             </li>

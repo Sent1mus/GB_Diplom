@@ -1,28 +1,50 @@
 from datetime import timedelta
-import random
 from django.core.management.base import BaseCommand
 from booking.models import Service
 
 class Command(BaseCommand):
-    help = 'Fills the Service database with dummy data'
+    help = 'Ensures specific services are in the Service database'
 
     def handle(self, *args, **options):
-        num_services = 10  # Number of services to create
+        # Define a list of services with their details
+        services_data = [
+            {
+                'name': 'Haircut',
+                'description': 'Basic haircut',
+                'duration': timedelta(hours=0, minutes=30),
+                'price': 1000.00
+            },
+            {
+                'name': 'Manicure',
+                'description': 'Nail shaping and cuticle care',
+                'duration': timedelta(hours=1, minutes=0),
+                'price': 2000.00
+            },
+            {
+                'name': 'Facial',
+                'description': 'Skin cleansing and facial treatment',
+                'duration': timedelta(hours=1, minutes=30),
+                'price': 3000.00
+            }
+        ]
 
-        for i in range(num_services):
-            name = f'Service{i}'
-            description = f'This is a description of Service{i}'
-            duration_minutes = random.randint(30, 180)  # Duration in minutes
-            price = random.uniform(50.0, 500.0)
-
-            # Create a timedelta object for duration
-            duration = timedelta(minutes=duration_minutes)
-
-            Service.objects.create(
-                name=name,
-                description=description,
-                duration=duration,
-                price=round(price, 2)
+        # Iterate over the services data
+        for service_data in services_data:
+            # Use get_or_create to avoid creating duplicate entries
+            service, created = Service.objects.get_or_create(
+                name=service_data['name'],
+                defaults={
+                    'description': service_data['description'],
+                    'duration': service_data['duration'],
+                    'price': service_data['price']
+                }
             )
 
-            self.stdout.write(self.style.SUCCESS(f'Successfully created service {name}'))
+            # Check if the service was created or fetched
+            if created:
+                message = f'Successfully created service {service.name}'
+            else:
+                message = f'Service {service.name} already exists'
+
+            # Print success message
+            self.stdout.write(self.style.SUCCESS(message))

@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <h1>Добро пожаловать в личный кабинет</h1>
+    <div id="email-container">
+        <span>Ваш Email: </span>
+        <span id="email-value">{{ user.email }}</span>
+        <button onclick="toggleEdit('email')">Изменить</button>
+        <input type="email" id="email-input" value="{{ user.email }}" style="display:none;">
+        <button onclick="save('email')" style="display:none;">Сохранить</button>
+    </div>
+    <div id="phone-container">
+        <span>Ваш Телефон: </span>
+        <span id="phone-value">{{ user.customer.phone }}</span>
+        <button onclick="toggleEdit('phone')">Изменить</button>
+        <input type="text" id="phone-input" value="{{ user.customer.phone }}" style="display:none;">
+        <button onclick="save('phone')" style="display:none;">Сохранить</button>
+    </div>
+    <div>
+        <span>Дата рождения: </span>
+        <span>{{ user.customer.birth_date|date:"j F Y г." }}</span>
+    </div>
+    <button onclick="togglePasswordChange()">Изменить пароль</button>
+    <div id="password-change" style="display:none;">
+        <input type="password" id="new-password" placeholder="Новый пароль">
+        <input type="password" id="confirm-password" placeholder="Подтвердите пароль">
+        <button onclick="changePassword()">Сохранить пароль</button>
+    </div>
+    <button onclick="deactivateProfile()">Удалить профиль</button>
+    <a href="{% url 'user_booking_list' %}">Просмотреть историю бронирований</a>
+</div>
+
+<script>
+function toggleEdit(field) {
+    let span = document.getElementById(field + '-value');
+    let input = document.getElementById(field + '-input');
+    let editButton = span.nextElementSibling;
+    let saveButton = input.nextElementSibling;
+
+    if (input.style.display === 'none') {
+        span.style.display = 'none';
+        input.style.display = 'inline';
+        editButton.style.display = 'none';
+        saveButton.style.display = 'inline';
+    } else {
+        span.style.display = 'inline';
+        input.style.display = 'none';
+        editButton.style.display = 'inline';
+        saveButton.style.display = 'none';
+    }
+}
+
+function save(field) {
+    let input = document.getElementById(field + '-input');
+    let span = document.getElementById(field + '-value');
+    let value = input.value;
+    let csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+
+    fetch("{% url 'edit_profile' %}", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify({field: field, value: value})
+    }).then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            span.textContent = value;
+            toggleEdit(field);
+        } else {
+            alert('Ошибка при сохранении данных');
+        }
+    });
+}
+
+function togglePasswordChange() {
+    let container = document.getElementById('password-change');
+    container.style.display = container.style.display === 'none' ? 'block' : 'none';
+}
+
+function changePassword() {
+    let newPassword = document.getElementById('new-password').value;
+    let confirmPassword = document.getElementById('confirm-password').value;
+    let csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+
+    if (newPassword !== confirmPassword) {
+        alert('Пароли не совпадают');
+        return;
+    }
+
+    fetch("{% url 'change_password' %}", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify({new_password: newPassword})
+    }).then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Пароль успешно изменен');
+            togglePasswordChange();
+        } else {
+            alert('Ошибка при изменении пароля');
+        }
+    });
+}
+
+function deactivateProfile() {
+    let csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+
+    fetch("{% url 'deactivate_profile' %}", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        }
+    }).then(response => {
+        if (response.ok) {
+            window.location.href = "{% url 'logout' %}";
+        } else {
+            alert('Ошибка при удалении профиля');
+        }
+    });
+}
+</script>
+{% endblock %}

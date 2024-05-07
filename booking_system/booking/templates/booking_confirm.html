@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="booking-confirm-container">
+    <h1>Confirm Booking for {{ service.name }} with {{ provider.user.username }}</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Confirm Booking</button>
+    </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var yearSelect = document.getElementById('id_year');
+    var monthSelect = document.getElementById('id_month');
+    var daySelect = document.getElementById('id_day');
+    var hourSelect = document.getElementById('id_hour');
+
+    function updateMonths() {
+        var year = yearSelect.value;
+        var currentYear = new Date().getFullYear();
+        var currentMonth = new Date().getMonth() + 1;
+
+        monthSelect.innerHTML = '';
+
+        for (var i = 1; i <= 12; i++) {
+            if (year == currentYear && i < currentMonth) continue;
+
+            var option = document.createElement('option');
+            option.text = i;
+            option.value = i;
+            monthSelect.add(option);
+        }
+    }
+
+    function updateDays() {
+        var year = yearSelect.value;
+        var month = monthSelect.value;
+        var currentYear = new Date().getFullYear();
+        var currentMonth = new Date().getMonth() + 1;
+        var currentDay = new Date().getDate();
+
+        daySelect.innerHTML = '';
+
+        var day = new Date(year, month, 0).getDate();
+
+        for (var i = 1; i <= day; i++) {
+            if (year == currentYear && month == currentMonth && i < currentDay) continue;
+
+            var option = document.createElement('option');
+            option.text = i;
+            option.value = i;
+            daySelect.add(option);
+        }
+    }
+
+    function updateHours() {
+        hourSelect.innerHTML = '';
+
+        for (var i = 9; i <= 19; i++) {
+            var option = document.createElement('option');
+            option.text = i;
+            option.value = i;
+            hourSelect.add(option);
+        }
+    }
+
+    yearSelect.addEventListener('change', function() {
+        updateMonths();
+        updateDays();
+    });
+    monthSelect.addEventListener('change', updateDays);
+    daySelect.addEventListener('change', updateHours);
+
+    updateMonths();
+    updateDays();
+    updateHours();
+});
+</script>
+{% endblock %}

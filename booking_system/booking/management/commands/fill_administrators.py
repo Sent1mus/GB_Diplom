@@ -8,7 +8,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Number of administrators to create
-        num_administrators = 5  # You can change this number as needed
+        num_administrators = 3  # You can change this number as needed
 
         for i in range(num_administrators):
             # Create a user for each administrator
@@ -18,19 +18,21 @@ class Command(BaseCommand):
             email = f'admin{i}@example.com'
             password = 'password'  # You might want to generate a more secure password
             phone = f'7927333220{i}'
+            birth_date = f'200{i}-01-0{i+1}'
 
             user = User.objects.create_user(
                 username=username,
-                first_name=first_name,
-                last_name=last_name,
+                password=password,
                 email=email,
-                password=password
+                first_name=first_name,
+                last_name=last_name
             )
 
-            # Create an administrator linked to the user
             Administrator.objects.create(
                 user=user,
+                birth_date=birth_date,
                 phone=phone
             )
+            # Create an administrator linked to the user
 
             self.stdout.write(self.style.SUCCESS(f'Successfully created administrator {username}'))

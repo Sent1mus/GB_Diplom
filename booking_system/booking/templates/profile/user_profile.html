@@ -31,7 +31,23 @@
     <a href="{% url 'user_booking_list' %}">Просмотреть историю бронирований</a>
 </div>
 
+<!-- Hidden input to store URLs for JavaScript -->
+<input type="hidden" id="updateProfileUrl" value="{% url 'update_profile' %}">
+<input type="hidden" id="changePasswordUrl" value="{% url 'change_password' %}">
+<input type="hidden" id="deactivateProfileUrl" value="{% url 'deactivate_profile' %}">
+
 <script>
+function getCSRFToken() {
+    let cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+        let [name, value] = cookie.trim().split('=');
+        if (name === 'csrftoken') {
+            return decodeURIComponent(value);
+        }
+    }
+    return null;
+}
+
 function toggleEdit(field) {
     let span = document.getElementById(field + '-value');
     let input = document.getElementById(field + '-input');
@@ -55,9 +71,10 @@ function save(field) {
     let input = document.getElementById(field + '-input');
     let span = document.getElementById(field + '-value');
     let value = input.value;
-    let csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+    let csrfToken = getCSRFToken();
+    let updateProfileUrl = document.getElementById('updateProfileUrl').value;
 
-    fetch("{% url 'edit_profile' %}", {
+    fetch(updateProfileUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -83,14 +100,15 @@ function togglePasswordChange() {
 function changePassword() {
     let newPassword = document.getElementById('new-password').value;
     let confirmPassword = document.getElementById('confirm-password').value;
-    let csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+    let csrfToken = getCSRFToken();
+    let changePasswordUrl = document.getElementById('changePasswordUrl').value;
 
     if (newPassword !== confirmPassword) {
         alert('Пароли не совпадают');
         return;
     }
 
-    fetch("{% url 'change_password' %}", {
+    fetch(changePasswordUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -109,9 +127,10 @@ function changePassword() {
 }
 
 function deactivateProfile() {
-    let csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+    let csrfToken = getCSRFToken();
+    let deactivateProfileUrl = document.getElementById('deactivateProfileUrl').value;
 
-    fetch("{% url 'deactivate_profile' %}", {
+    fetch(deactivateProfileUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -119,7 +138,7 @@ function deactivateProfile() {
         }
     }).then(response => {
         if (response.ok) {
-            window.location.href = "{% url 'logout' %}";
+            window.location.href = "/logout/";
         } else {
             alert('Ошибка при удалении профиля');
         }

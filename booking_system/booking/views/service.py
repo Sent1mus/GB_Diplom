@@ -34,8 +34,9 @@ def booking_confirm(request, service_id, provider_id):
             booking.customer = request.user.customer
             booking.service = service
             booking.service_provider = provider
+            booking.appointment_datetime = form.cleaned_data['appointment_datetime']
             booking.save()
-            return redirect('booking_list')
+            return redirect('user_booking_list')
     else:
         form = BookingForm(initial={'service': service, 'service_provider': provider})
 

@@ -34,7 +34,7 @@ class Customer(BaseProfile):
 class Service(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    duration = models.DurationField()  # Продолжительность услуги
+    duration = models.DurationField()
     price = models.DecimalField(max_digits=6, decimal_places=2)  # Цена услуги
 
     def __str__(self):
@@ -45,7 +45,7 @@ class Booking(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     service_provider = models.ForeignKey(ServiceProvider, on_delete=models.CASCADE)
-    appointment_datetime = models.DateTimeField(default=timezone.now)
+    appointment_datetime = models.DateTimeField(default=timezone.now) #TODO удалить default после сдачи, нужно для заполнения бд коммандой
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

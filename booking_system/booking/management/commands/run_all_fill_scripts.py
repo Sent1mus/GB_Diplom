@@ -37,9 +37,9 @@ class Command(BaseCommand):
         call_command('fill_reviews')
         self.stdout.write(self.style.SUCCESS('Finished filling reviews.'))
 
-        self.stdout.write(self.style.SUCCESS('Starting to fill bookings...'))
-        call_command('fill_bookings')
-        self.stdout.write(self.style.SUCCESS('Finished filling bookings.'))
+        # self.stdout.write(self.style.SUCCESS('Starting to fill bookings...'))
+        # call_command('fill_bookings')
+        # self.stdout.write(self.style.SUCCESS('Finished filling bookings.'))
 
         self.stdout.write(self.style.SUCCESS('Starting to fill manytomany...'))
         call_command('fill_manytomany')

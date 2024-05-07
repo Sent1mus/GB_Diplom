@@ -67,6 +67,7 @@ class BookingForm(forms.ModelForm):
             try:
                 appointment_datetime = datetime(int(year), int(month), int(day), int(hour), int(minute))
                 cleaned_data['appointment_datetime'] = appointment_datetime
+                print(cleaned_data)
             except ValueError:
                 raise forms.ValidationError("Invalid date or time.")
 

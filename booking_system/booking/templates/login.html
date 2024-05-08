@@ -2,14 +2,22 @@
 
 {% block content %}
 <div class="login-container">
-    <h2>Login</h2>
+    <h2>Login</h2><br>
     <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username" required>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required>
-        <button type="submit">Login</button>
+        <table>
+            <tr>
+                <td>Username:</td>
+                <td><input type="text" name="username" id="username" required></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type="password" name="password" id="password" required></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit" class="login-button">Login</button></td>
+            </tr>
+        </table>
         {% if error %}
             <p style="color: red;">{{ error }}</p>
         {% endif %}

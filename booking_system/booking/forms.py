@@ -4,14 +4,41 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 class RegisterForm(UserCreationForm):
-    first_name = forms.CharField(max_length=30, required=True)
-    last_name = forms.CharField(max_length=30, required=True)
-    email = forms.EmailField(max_length=75, required=True)
-    phone = forms.CharField(max_length=20, required=True)
+    first_name = forms.CharField(
+        max_length=30,
+        required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'First Name'})
+    )
+    last_name = forms.CharField(
+        max_length=30,
+        required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'Last Name'})
+    )
+    email = forms.EmailField(
+        max_length=75,
+        required=True,
+        widget=forms.EmailInput(attrs={'placeholder': 'Email'})
+    )
+    phone = forms.CharField(
+        max_length=20,
+        required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'Phone Number'})
+    )
+    birth_date = forms.DateField(
+        required=True,
+        input_formats=['%d.%m.%Y'],  # Ожидаемый формат даты
+        widget=forms.DateInput(format='%d.%m.%Y', attrs={'placeholder': 'DD.MM.YYYY'})
+    )
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'phone')
+        fields = ('first_name', 'last_name', 'username', 'email', 'phone', 'password1', 'password2')
+
+    def __init__(self, *args, **kwargs):
+        super(RegisterForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({'placeholder': 'Username'})
+        self.fields['password1'].widget.attrs.update({'placeholder': 'Password'})
+        self.fields['password2'].widget.attrs.update({'placeholder': 'Confirm Password'})
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -20,7 +47,11 @@ class RegisterForm(UserCreationForm):
         user.email = self.cleaned_data['email']
         if commit:
             user.save()
-            BaseProfile.objects.create(user=user, phone=self.cleaned_data['phone'])
+            Customer.objects.create(
+                user=user,
+                phone=self.cleaned_data['phone'],
+                birth_date=self.cleaned_data['birth_date']  # Сохраняем дату рождения
+            )
         return user
 
 
@@ -28,6 +59,7 @@ class CustomModelChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, obj):
         """ Форматирует отображаемое имя для объектов ServiceProvider. """
         return f"{obj.user.first_name} {obj.user.last_name} - {obj.specialization}"
+
 
 class BookingForm(forms.ModelForm):
     # Assuming these fields are already defined as shown in your initial snippet
@@ -57,7 +89,6 @@ class BookingForm(forms.ModelForm):
             raise forms.ValidationError("Invalid date or time: {}".format(e))
 
         return cleaned_data
-
 
 
 class ReviewForm(forms.ModelForm):

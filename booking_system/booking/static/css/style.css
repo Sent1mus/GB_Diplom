@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding-top: 60px;
     font-family: 'Fira Sans', sans-serif;
-    background-color: black;
+    background-color: #495057;
     color: #ccc;
 }
 
@@ -85,3 +85,68 @@ body {
     width: 80%; /* Процент может быть изменен в зависимости от предпочтений */
     text-align: center; /* Центрирование текста внутри каждого блока услуги */
 }
+
+/* Стили для центрированной формы с таблицей на страницы регистрации*/
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    width: 100%;
+}
+
+.signup-container h2 {
+    margin-bottom: 20px;
+}
+
+.signup-container table {
+    border-collapse: collapse;
+    margin: auto;
+    width: 100%; /* Adjust width as needed */
+}
+
+.signup-container td {
+    padding: 8px;
+    text-align: left;
+}
+
+.signup-container td:first-child {
+    text-align: right;
+    padding-right: 20px;
+}
+
+.signup-container .register-button {
+    width: 100%;
+    padding: 10px 0;
+}
+/* Стили для центрированной формы с таблицей на страницы регистрации*/
+
+/* Стили для страницы логина*/
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Высота контейнера изменена на 100vh для полного центрирования по вертикали */
+}
+
+.login-container h2 {
+    margin-bottom: 20px; /* Добавляем отступ между заголовком и формой */
+}
+
+.login-container table {
+    width: 300px; /* Устанавливаем фиксированную ширину для таблицы */
+    border-collapse: collapse;
+}
+
+.login-container td {
+    padding: 8px;
+}
+
+.login-container .login-button {
+    width: 100%; /* Ширина кнопки, чтобы она занимала всю ширину таблицы */
+    padding: 10px 0; /* Добавляем паддинг для удобства нажатия */
+}
+
+/* Стили для страницы логина*/

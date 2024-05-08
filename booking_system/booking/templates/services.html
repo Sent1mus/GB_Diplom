@@ -16,16 +16,16 @@
                     {% csrf_token %}
                     <input type="hidden" name="service_id" value="{{ service.id }}">
                     <div class="form-row">
+                        {{ form.service_provider }}<br><br>
                         {{ form.year }}
                         {{ form.month }}
                         {{ form.day }}
                         {{ form.hour }}
                         {{ form.minute }}
+                        <br><br>
                     </div>
-                    <br><br>
-                    {{ form.service_provider }}
                     <button type="submit">Confirm Booking</button>
-                </form>
+                 </form>
             </td>
         </tr>
         {% endfor %}

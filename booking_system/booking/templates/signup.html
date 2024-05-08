@@ -3,13 +3,66 @@
 {% block title %}Signup - Beauty Saloon{% endblock %}
 
 {% block content %}
-<div class="content-container">
-    <h1>Signup</h1>
-    <p>Create your account to book services and get exclusive offers.</p>
+<div class="signup-container">
+    <h2>Registration</h2><br>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
+        <table>
+            <tr>
+                <td>First Name:</td>
+                <td>{{ form.first_name }}</td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td>{{ form.last_name }}</td>
+            </tr>
+            <tr>
+                <td>Username:</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>{{ form.email }}</td>
+            </tr>
+            <tr>
+                <td>Phone Number:</td>
+                <td>{{ form.phone }}</td>
+            </tr>
+            <tr>
+                <td>Birth Date:</td>
+                <td>{{ form.birth_date }}</td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td>{{ form.password1 }}</td>
+            </tr>
+            <tr>
+                <td>Confirm Password:</td>
+                <td>{{ form.password2 }}</td>
+            </tr>
+        </table>
+        {% if form.errors %}
+            <div class="form-errors" style="color: red;">
+                Please correct the errors below.
+            </div>
+        {% endif %}
+            <button type="submit" class="register-button">Register</button>
+        </div>
     </form>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var birthDateInput = document.getElementById('id_birth_date');
+
+    birthDateInput.addEventListener('keyup', function() {
+        var value = this.value.replace(/[^0-9]/g, ''); // Удаляем все нечисловые символы
+        if (value.length >= 2 && value.length <= 3) {
+            this.value = value.slice(0, 2) + '.' + value.slice(2);
+        } else if (value.length > 4) {
+            this.value = value.slice(0, 2) + '.' + value.slice(2, 4) + '.' + value.slice(4);
+        }
+    });
+});
+
+</script>
 {% endblock %}

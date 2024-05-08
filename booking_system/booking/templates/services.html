@@ -1,17 +1,105 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="services-container">
-    {% for service in services %}
-    <div class="service-item">
-        <h2>{{ service.name }}</h2>
-        <p>{{ service.description }}</p>
-        <p>Duration: {{ service.duration }}</p>
-        <p>Price: {{ service.price }}</p>
-        <form method="get" action="{% url 'book_service' service.id %}">
-            <button type="submit">Book</button>
-        </form>
-    </div>
-    {% endfor %}
+<div style="display: flex; justify-content: center;">
+    <table>
+        {% for service in services %}
+        <tr>
+            <td>
+                <h2>{{ service.name }}</h2>
+                <p>{{ service.description }}</p>
+                <p>Duration: {{ service.duration }}</p>
+                <p>Price: {{ service.price }}</p>
+            </td>
+            <td>
+                 <form method="post" action="">
+                    {% csrf_token %}
+                    <input type="hidden" name="service_id" value="{{ service.id }}">
+                    <div class="form-row">
+                        {{ form.year }}
+                        {{ form.month }}
+                        {{ form.day }}
+                        {{ form.hour }}
+                        {{ form.minute }}
+                    </div>
+                    <br><br>
+                    {{ form.service_provider }}
+                    <button type="submit">Confirm Booking</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var yearSelect = document.getElementById('id_year');
+    var monthSelect = document.getElementById('id_month');
+    var daySelect = document.getElementById('id_day');
+    var hourSelect = document.getElementById('id_hour');
+
+    function updateMonths() {
+        var year = yearSelect.value;
+        var currentYear = new Date().getFullYear();
+        var currentMonth = new Date().getMonth() + 1;
+
+        monthSelect.innerHTML = '';
+
+        for (var i = 1; i <= 12; i++) {
+            if (year == currentYear && i < currentMonth) continue;
+
+            var option = document.createElement('option');
+            option.text = i;
+            option.value = i;
+            monthSelect.add(option);
+        }
+    }
+
+    function updateDays() {
+        var year = yearSelect.value;
+        var month = monthSelect.value;
+        var currentYear = new Date().getFullYear();
+        var currentMonth = new Date().getMonth() + 1;
+        var currentDay = new Date().getDate();
+
+        daySelect.innerHTML = '';
+
+        var day = new Date(year, month, 0).getDate();
+
+        for (var i = 1; i <= day; i++) {
+            if (year == currentYear && month == currentMonth && i < currentDay) continue;
+
+            var option = document.createElement('option');
+            option.text = i;
+            option.value = i;
+            daySelect.add(option);
+        }
+    }
+
+    function updateHours() {
+        hourSelect.innerHTML = '';
+
+        for (var i = 9; i <= 19; i++) {
+            var option = document.createElement('option');
+            option.text = i;
+            option.value = i;
+            hourSelect.add(option);
+        }
+    }
+
+    yearSelect.addEventListener('change', function() {
+        updateMonths();
+        updateDays();
+    });
+    monthSelect.addEventListener('change', updateDays);
+    daySelect.addEventListener('change', updateHours);
+
+    updateMonths();
+    updateDays();
+    updateHours();
+});
+
+</script>
+
 {% endblock %}

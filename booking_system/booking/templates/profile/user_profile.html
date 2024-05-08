@@ -28,7 +28,7 @@
         <button onclick="changePassword()">Сохранить пароль</button>
     </div>
     <button onclick="deactivateProfile()">Удалить профиль</button>
-    <a href="{% url 'user_booking_list' %}">Просмотреть историю бронирований</a>
+    <a href="{% url 'list_booking' %}">Просмотреть историю бронирований</a>
 </div>
 
 <!-- Hidden input to store URLs for JavaScript -->
@@ -103,6 +103,13 @@ function changePassword() {
     let csrfToken = getCSRFToken();
     let changePasswordUrl = document.getElementById('changePasswordUrl').value;
 
+    // Проверка на пустоту пароля
+    if (!newPassword.trim() || !confirmPassword.trim()) {
+        alert('Пароль не может быть пустым');
+        return;
+    }
+
+    // Проверка на совпадение паролей
     if (newPassword !== confirmPassword) {
         alert('Пароли не совпадают');
         return;

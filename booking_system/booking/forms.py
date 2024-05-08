@@ -1,6 +1,3 @@
-from datetime import datetime
-from time import strptime
-
 from .models import *
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
@@ -27,60 +24,40 @@ class RegisterForm(UserCreationForm):
         return user
 
 
+class CustomModelChoiceField(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        """ Форматирует отображаемое имя для объектов ServiceProvider. """
+        return f"{obj.user.first_name} {obj.user.last_name} - {obj.specialization}"
+
 class BookingForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(BookingForm, self).__init__(*args, **kwargs)
-        now = timezone.now()
-        current_year = now.year
-        current_month = now.month
-        current_day = now.day
-        current_hour = now.hour
-
-        # Генерация выборов для года
-        self.fields['year'] = forms.ChoiceField(choices=[(i, i) for i in range(current_year, current_year + 2)])
-
-        # Генерация выборов для месяца
-        self.fields['month'] = forms.ChoiceField(choices=[(i, i) for i in range(current_month, 13)])
-
-        # Генерация выборов для дня
-        self.fields['day'] = forms.ChoiceField(choices=[(i, i) for i in range(current_day, 31)])
-
-        # Генерация выборов для часа (с 9 до 19)
-        self.fields['hour'] = forms.ChoiceField(choices=[(i, i) for i in range(9, 20)])
-
-        # Генерация выборов для минут (только минуты, кратные 30)
-        self.fields['minute'] = forms.ChoiceField(choices=[(i, i) for i in range(0, 60, 30)])
+    # Assuming these fields are already defined as shown in your initial snippet
+    year = forms.ChoiceField(choices=[(i, i) for i in range(timezone.now().year, timezone.now().year + 2)])
+    month = forms.ChoiceField(choices=[(i, i) for i in range(1, 13)])
+    day = forms.ChoiceField(choices=[(i, i) for i in range(1, 32)])
+    hour = forms.ChoiceField(choices=[(i, i) for i in range(0, 24)])
+    minute = forms.ChoiceField(choices=[(i, i) for i in range(0, 60, 30)])
+    service_provider = CustomModelChoiceField(queryset=ServiceProvider.objects.all())
 
     class Meta:
         model = Booking
-        fields = ['service', 'service_provider']
+        fields = ['service_provider']
 
     def clean(self):
         cleaned_data = super().clean()
-        year = cleaned_data.get('year')
-        month = cleaned_data.get('month')
-        day = cleaned_data.get('day')
-        hour = cleaned_data.get('hour')
-        minute = cleaned_data.get('minute')
+        year = int(cleaned_data.get('year'))
+        month = int(cleaned_data.get('month'))
+        day = int(cleaned_data.get('day'))
+        hour = int(cleaned_data.get('hour'))
+        minute = int(cleaned_data.get('minute'))
 
-        if year and month and day and hour and minute:
-            try:
-                appointment_datetime = datetime(int(year), int(month), int(day), int(hour), int(minute))
-                cleaned_data['appointment_datetime'] = appointment_datetime
-                print(cleaned_data)
-            except ValueError:
-                raise forms.ValidationError("Invalid date or time.")
+        # Constructing the datetime object
+        try:
+            cleaned_data['appointment_datetime'] = timezone.datetime(year, month, day, hour, minute)
+        except ValueError as e:
+            raise forms.ValidationError("Invalid date or time: {}".format(e))
 
         return cleaned_data
 
-
-class ServiceProviderForm(forms.Form):
-    service_provider = forms.ModelChoiceField(queryset=None, label='Выберите поставщика услуг')
-
-    def __init__(self, *args, **kwargs):
-        available_service_providers = kwargs.pop('available_service_providers', None)
-        super().__init__(*args, **kwargs)
-        self.fields['service_provider'].queryset = available_service_providers
 
 
 class ReviewForm(forms.ModelForm):

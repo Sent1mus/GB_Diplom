@@ -4,7 +4,7 @@ from ..models import Booking, Customer
 from django.contrib.auth.decorators import login_required
 
 @login_required
-def user_booking_list(request):
+def list_booking(request):
     user = request.user
     try:
         customer_profile = Customer.objects.get(user=user)

@@ -78,13 +78,18 @@ class EditProfileForm(forms.ModelForm):
 
 
 class CustomModelChoiceField(forms.ModelChoiceField):
+    def __init__(self, *args, **kwargs):
+        # Устанавливаем плейсхолдер с помощью empty_label
+        kwargs['empty_label'] = "Выберите мастера"
+        super().__init__(*args, **kwargs)
+
     def label_from_instance(self, obj):
         """ Форматирует отображаемое имя для объектов ServiceProvider. """
         return f"{obj.user.first_name} {obj.user.last_name} - {obj.specialization}"
 
 
 class ServiceProviderForm(forms.Form):
-    service_provider = forms.ModelChoiceField(
+    service_provider = CustomModelChoiceField(
         queryset=ServiceProvider.objects.all(),
         widget=forms.Select(attrs={'id': 'service_provider'}),
         label="Select Service Provider"

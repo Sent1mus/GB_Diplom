@@ -14,7 +14,7 @@ urlpatterns = [
     path('logout/', user_logout, name='logout'),
 
     path('services/', services, name='services'),
-    path('ajax/get_available_times/', get_available_times, name='get_available_times'),
+    # path('ajax/get_available_times/', get_available_times, name='get_available_times'),
     # path('services/book/<int:service_id>/', book_service, name='book_service'),
     # path('services/select-provider/<int:service_id>/', select_provider, name='select_provider'),
     # path('services/booking-confirm/<int:service_id>/<int:provider_id>/', booking_confirm, name='booking_confirm'),

@@ -17,13 +17,13 @@ class Command(BaseCommand):
             {
                 'name': 'Manicure',
                 'description': 'Nail shaping and cuticle care',
-                'duration': timedelta(hours=1, minutes=0),
+                'duration': timedelta(hours=0, minutes=45),
                 'price': 2000.00
             },
             {
                 'name': 'Facial',
                 'description': 'Skin cleansing and facial treatment',
-                'duration': timedelta(hours=1, minutes=30),
+                'duration': timedelta(hours=1, minutes=00),
                 'price': 3000.00
             }
         ]

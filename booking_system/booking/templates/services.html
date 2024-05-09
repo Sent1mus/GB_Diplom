@@ -2,8 +2,8 @@
 
 {% block content %}
 <div style="display: flex; justify-content: center;">
-    <table>
-        {% for service in services %}
+    <table class="services">
+        {% for service, provider_form, date_time_form, error_message, current_data in forms_list %}
         <tr>
             <td>
                 <h2>{{ service.name }}</h2>
@@ -12,94 +12,60 @@
                 <p>Price: {{ service.price }}</p>
             </td>
             <td>
-                 <form method="post" action="">
+                <form method="post" action="">
                     {% csrf_token %}
                     <input type="hidden" name="service_id" value="{{ service.id }}">
-                    <div class="form-row">
-                        {{ form.service_provider }}<br><br>
-                        {{ form.year }}
-                        {{ form.month }}
-                        {{ form.day }}
-                        {{ form.hour }}
-                        {{ form.minute }}
-                        <br><br>
-                    </div>
-                    <button type="submit">Confirm Booking</button>
-                 </form>
+                    {{ provider_form.as_p }}
+                    {{ date_time_form.as_p }}
+                    {% if error_message %}
+                    <p style="color: red;">{{ error_message }}</p>
+                    {% endif %}
+                    <button type="submit">Book</button>
+                </form>
             </td>
         </tr>
         {% endfor %}
     </table>
 </div>
-
+<!-- TODO DELETE IF NOT NEEDED
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    var yearSelect = document.getElementById('id_year');
-    var monthSelect = document.getElementById('id_month');
-    var daySelect = document.getElementById('id_day');
-    var hourSelect = document.getElementById('id_hour');
-
-    function updateMonths() {
-        var year = yearSelect.value;
-        var currentYear = new Date().getFullYear();
-        var currentMonth = new Date().getMonth() + 1;
-
-        monthSelect.innerHTML = '';
-
-        for (var i = 1; i <= 12; i++) {
-            if (year == currentYear && i < currentMonth) continue;
-
-            var option = document.createElement('option');
-            option.text = i;
-            option.value = i;
-            monthSelect.add(option);
-        }
-    }
-
-    function updateDays() {
-        var year = yearSelect.value;
-        var month = monthSelect.value;
-        var currentYear = new Date().getFullYear();
-        var currentMonth = new Date().getMonth() + 1;
-        var currentDay = new Date().getDate();
-
-        daySelect.innerHTML = '';
-
-        var day = new Date(year, month, 0).getDate();
-
-        for (var i = 1; i <= day; i++) {
-            if (year == currentYear && month == currentMonth && i < currentDay) continue;
-
-            var option = document.createElement('option');
-            option.text = i;
-            option.value = i;
-            daySelect.add(option);
-        }
-    }
-
-    function updateHours() {
-        hourSelect.innerHTML = '';
-
-        for (var i = 9; i <= 19; i++) {
-            var option = document.createElement('option');
-            option.text = i;
-            option.value = i;
-            hourSelect.add(option);
-        }
-    }
-
-    yearSelect.addEventListener('change', function() {
-        updateMonths();
-        updateDays();
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('#service_provider').forEach(providerSelect => {
+            providerSelect.addEventListener('change', function() {
+                var providerId = this.value;
+                var serviceId = this.closest('form').querySelector('input[name="service_id"]').value;
+                var dateTimeForm = document.getElementById('date_time_form_' + serviceId);
+                fetch(`/ajax/get_available_times/?provider_id=${providerId}`, {
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                }).then(response => response.json())
+                .then(data => {
+                    dateTimeForm.style.display = 'block';
+                    updateDateTimeFormFields(data, serviceId);
+                }).catch(error => console.error('Error:', error));
+            });
+        });
     });
-    monthSelect.addEventListener('change', updateDays);
-    daySelect.addEventListener('change', updateHours);
 
-    updateMonths();
-    updateDays();
-    updateHours();
-});
-
+    function updateDateTimeFormFields(data, serviceId) {
+        const fields = ['month', 'day', 'hour']; // Updated fields array
+        fields.forEach(field => {
+            const selectElement = document.getElementById('id_' + field + '_' + serviceId);
+            if (!selectElement) {
+                console.error(`Select element not found for ${field} and service ID ${serviceId}`);
+                return;
+            }
+            selectElement.innerHTML = ''; // Clear existing options
+            data[field + 's'].forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option;
+                optionElement.text = option;
+                selectElement.appendChild(optionElement);
+            });
+        });
+    }
 </script>
-
+-->
 {% endblock %}

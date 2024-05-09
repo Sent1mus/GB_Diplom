@@ -1,3 +1,5 @@
+import calendar
+
 from .models import *
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
@@ -55,48 +57,6 @@ class RegisterForm(UserCreationForm):
         return user
 
 
-class CustomModelChoiceField(forms.ModelChoiceField):
-    def label_from_instance(self, obj):
-        """ Форматирует отображаемое имя для объектов ServiceProvider. """
-        return f"{obj.user.first_name} {obj.user.last_name} - {obj.specialization}"
-
-
-class BookingForm(forms.ModelForm):
-    # Assuming these fields are already defined as shown in your initial snippet
-    year = forms.ChoiceField(choices=[(i, i) for i in range(timezone.now().year, timezone.now().year + 2)])
-    month = forms.ChoiceField(choices=[(i, i) for i in range(1, 13)])
-    day = forms.ChoiceField(choices=[(i, i) for i in range(1, 32)])
-    hour = forms.ChoiceField(choices=[(i, i) for i in range(0, 24)])
-    minute = forms.ChoiceField(choices=[(i, i) for i in range(0, 60, 30)])
-    service_provider = CustomModelChoiceField(queryset=ServiceProvider.objects.all())
-
-    class Meta:
-        model = Booking
-        fields = ['service_provider']
-
-    def clean(self):
-        cleaned_data = super().clean()
-        year = int(cleaned_data.get('year'))
-        month = int(cleaned_data.get('month'))
-        day = int(cleaned_data.get('day'))
-        hour = int(cleaned_data.get('hour'))
-        minute = int(cleaned_data.get('minute'))
-
-        # Constructing the datetime object
-        try:
-            cleaned_data['appointment_datetime'] = timezone.datetime(year, month, day, hour, minute)
-        except ValueError as e:
-            raise forms.ValidationError("Invalid date or time: {}".format(e))
-
-        return cleaned_data
-
-
-class ReviewForm(forms.ModelForm):
-    class Meta:
-        model = Review
-        fields = ['rating', 'comment']
-
-
 class EditProfileForm(forms.ModelForm):
     email = forms.EmailField(required=True)
 
@@ -115,3 +75,61 @@ class EditProfileForm(forms.ModelForm):
             instance.user.save()
             instance.save()
         return instance
+
+
+class CustomModelChoiceField(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        """ Форматирует отображаемое имя для объектов ServiceProvider. """
+        return f"{obj.user.first_name} {obj.user.last_name} - {obj.specialization}"
+
+
+class ServiceProviderForm(forms.Form):
+    service_provider = forms.ModelChoiceField(
+        queryset=ServiceProvider.objects.all(),
+        widget=forms.Select(attrs={'id': 'service_provider'}),
+        label="Select Service Provider"
+    )
+
+
+class BookingDateTimeForm(forms.Form):
+    current_year = timezone.now().year
+    current_month = timezone.now().month
+    current_day = timezone.now().day
+    current_hour = timezone.now().hour
+
+    # Adjust month choices
+    if current_month == 12:
+        month_choices = [(12, 'December'), (1, 'January')]
+    else:
+        month_choices = [(current_month, calendar.month_name[current_month]),
+                         (current_month + 1, calendar.month_name[current_month + 1])]
+
+    # Fields
+    month = forms.ChoiceField(choices=month_choices, initial=current_month)
+    day = forms.ChoiceField(choices=[(i, i) for i in range(1, calendar.monthrange(current_year, current_month)[1] + 1)], initial=current_day)
+    hour = forms.ChoiceField(choices=[(i, i) for i in range(9, 21)], initial=current_hour if 9 <= current_hour <= 20 else 9)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        year = self.current_year  # Use the current year
+        month = cleaned_data.get('month')
+        day = cleaned_data.get('day')
+        hour = cleaned_data.get('hour')
+        minute = 0  # Always set minutes to 00
+
+        if month and day and hour:
+            try:
+                cleaned_data['appointment_datetime'] = timezone.datetime(year, int(month), int(day), int(hour), minute,
+                                                                         tzinfo=timezone.get_current_timezone())
+            except ValueError as e:
+                raise forms.ValidationError("Invalid date or time: {}".format(e))
+        else:
+            raise forms.ValidationError("Please fill in all date and time fields.")
+
+        return cleaned_data
+
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['rating', 'comment']

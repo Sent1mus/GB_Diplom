@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding-top: 60px;
     font-family: 'Fira Sans', sans-serif;
-    background-color: #495057;
+    background-color: #333;
     color: #ccc;
 }
 
@@ -69,22 +69,62 @@ body {
     margin-top: 60px;
 }
 
-.services-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh; /* Занимает минимальную высоту во всю высоту видимой части экрана */
-    width: 100%; /* Занимает всю ширину контейнера */
+/* Base styling for the services table */
+.services table {
+    width: 80%; /* Set the width of the table */
+    margin: 20px auto; /* Center the table horizontally and add some margin for spacing */
+    border-collapse: collapse; /* Collapse borders between table cells */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add a subtle shadow to make the table pop out */
+    border: 1px solid gold; /* Golden border for the table */
 }
 
-.service-item {
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    width: 80%; /* Процент может быть изменен в зависимости от предпочтений */
-    text-align: center; /* Центрирование текста внутри каждого блока услуги */
+.services td, .services th {
+    border: 1px solid gold; /* Light grey border for each cell */
+    padding: 8px; /* Padding inside cells for better text alignment */
+    text-align: left; /* Align text to the left */
 }
+
+.services h2 {
+    color: gold; /* Dark grey color for headings */
+    font-size: 24px; /* Larger font size for service name */
+}
+
+.services p {
+    color: #ссс; /* Medium grey color for paragraph text */
+    margin: 5px 0; /* Add top and bottom margin to separate paragraphs from each other */
+}
+
+/* Styling for forms within the table */
+.services form {
+    display: block; /* Ensure the form takes the full cell space */
+    margin-top: 10px; /* Margin at the top of the form for spacing */
+}
+
+.services input, .services select, .services button {
+    width: 100%; /* Full width for inputs, selects, and buttons */
+    padding: 10px; /* Padding for better touch interaction */
+    margin-top: 5px; /* Space between form elements */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.services button {
+    background-color: #4CAF50; /* Green background for the button */
+    color: white; /* White text color */
+    border: none; /* No border for a cleaner look */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.services button:hover {
+    background-color: #45a049; /* Darker green when hovered */
+}
+
+/* Error message styling */
+.services p[style*="color: red;"] {
+    font-weight: bold; /* Make error messages bold */
+    color: #ff0000; /* Bright red color for visibility */
+}
+
 
 /* Стили для центрированной формы с таблицей на страницы регистрации*/
 .signup-container {

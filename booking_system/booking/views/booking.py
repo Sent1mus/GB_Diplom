@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from ..forms import BookingForm
+from ..forms import *
 from ..models import Booking, Customer
 from django.contrib.auth.decorators import login_required
 

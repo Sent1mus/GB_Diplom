@@ -7,27 +7,29 @@
     <title>{% block title %}Beauty Saloon{% endblock %}</title>
 </head>
 <body>
-    <div class="nav-container">
-        <ul>
-            <li><a href="{% url 'main' %}" class="nav-link">Главная</a></li>
-            <li><a href="{% url 'about_us' %}" class="nav-link">О салоне</a></li>
-            <li><a href="{% url 'services' %}" class="nav-link">Наши услуги</a></li>
-            {% if request.user.is_authenticated %}
-            <li><a href="{% url 'user_profile' %}" class="nav-link">Профиль</a></li>
-            <li>
-                <a href="{% url 'logout' %}" class="nav-link">Выйти</a>
-            </li>
-            {% else %}
-            <li><a href="{% url 'signup' %}" class="nav-link">Регистрация</a></li>
-            <li><a href="{% url 'login' %}" class="nav-link">Войти</a></li>
-            {% endif %}
-        </ul>
-    </div>
+    <header>
+        <nav class="nav-container">
+            <ul>
+                <li><a href="{% url 'main' %}" class="nav-link">Главная</a></li>
+                <li><a href="{% url 'about_us' %}" class="nav-link">О салоне</a></li>
+                <li><a href="{% url 'services' %}" class="nav-link">Наши услуги</a></li>
+                {% if request.user.is_authenticated %}
+                <li><a href="{% url 'user_profile' %}" class="nav-link">Профиль</a></li>
+                <li><a href="{% url 'logout' %}" class="nav-link">Выйти</a></li>
+                {% else %}
+                <li><a href="{% url 'signup' %}" class="nav-link">Регистрация</a></li>
+                <li><a href="{% url 'login' %}" class="nav-link">Войти</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
     {% block content %}
     {% endblock %}
     <footer>
         {% block footer %}
         {% endblock %}
     </footer>
+    {% block javascript %}
+    {% endblock %}
 </body>
 </html>

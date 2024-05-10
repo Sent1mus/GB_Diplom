@@ -1,17 +1,18 @@
+# views.py
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from ..models import Customer
-from django.contrib.auth.forms import PasswordChangeForm
+from ..forms import CustomPasswordChangeForm
 import json
 
 
 @login_required
 def user_profile(request):
     customer = Customer.objects.get(user=request.user)
-    password_form = PasswordChangeForm(request.user)
+    password_form = CustomPasswordChangeForm(request.user)
     return render(request, 'profile/user_profile.html', {
         'password_form': password_form
     })
@@ -42,13 +43,14 @@ def update_profile(request):
 def change_user_password(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        new_password = data.get('new_password')
-        user = request.user
-        user.set_password(new_password)
-        user.save()
-        update_session_auth_hash(request, user)  # Important to keep the user logged in
-        return JsonResponse({'success': True})
-    return JsonResponse({'success': False})
+        form = CustomPasswordChangeForm(user=request.user, data=data)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return JsonResponse({'success': True})
+        else:
+            print(form.errors)  # Log form errors to the console
+            return JsonResponse({'success': False, 'errors': form.errors})
 
 
 @login_required
@@ -56,7 +58,7 @@ def change_user_password(request):
 def deactivate_user_profile(request):
     if request.method == 'POST':
         customer = Customer.objects.get(user=request.user)
-        customer.is_active = False
-        customer.save()
+        customer.user.is_active = False
+        customer.user.save()
         return JsonResponse({'success': True})
     return JsonResponse({'success': False})

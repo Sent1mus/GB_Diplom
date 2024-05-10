@@ -108,15 +108,15 @@ body {
 }
 
 .services button {
-    background-color: #4CAF50; /* Green background for the button */
-    color: white; /* White text color */
+    background-color: gold; /* Green background for the button */
+    color: black; /* White text color */
     border: none; /* No border for a cleaner look */
     cursor: pointer; /* Pointer cursor on hover */
     transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
 
 .services button:hover {
-    background-color: #45a049; /* Darker green when hovered */
+    background-color: #d4af37; /* Darker green when hovered */
 }
 
 /* Error message styling */
@@ -190,3 +190,107 @@ body {
 }
 
 /* Стили для страницы логина*/
+
+
+/* Основные стили для контейнера профиля пользователя */
+.user-profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+    color: #ccc;
+    background-color: #333;
+    min-height: 100vh;
+}
+
+/* Стили для каждого раздела в профиле */
+.profile-section {
+    width: 50%;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #161618;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px; /* Space between rows */
+}
+
+.profile-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%; /* Each column takes half the width of the row */
+}
+
+.profile-input, .edit-button, .save-button {
+    display: none; /* Initially hidden, shown by JavaScript */
+}
+
+.profile-section button, .profile-input, input[type="email"], input[type="text"], input[type="password"] {
+    width: auto; /* Adjust width as per content */
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    background-color: gold;
+    color: #333;
+    border-radius: 5px;
+}
+
+.profile-section button:hover {
+    background-color: #d4af37;
+}
+
+.edit-button, .save-button, .profile-button, input[type="email"], input[type="text"], input[type="password"] {
+    background-color: #fff;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.edit-button:hover, .save-button:hover, .profile-button:hover, input[type="email"]:hover, input[type="text"]:hover, input[type="password"]:hover {
+    background-color: #d4af37;
+}
+
+.profile-button-row {
+    display: flex;
+    justify-content: center; /* Center the button horizontally */
+    width: 100%; /* Full width to contain the button */
+    margin: 10px 0; /* Space above and below the row */
+}
+
+.profile-button-row .link-as-button, .profile-button-row .delete-profile-button {
+    display: inline-block; /* Allows the width to be set */
+    width: 50%; /* Set the width to 50% of its container */
+    background-color: #007bff; /* Initial blue background for both */
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.profile-button-row .link-as-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.profile-button-row .delete-profile-button {
+    background-color: #ff0000; /* Red background */
+}
+
+.profile-button-row .delete-profile-button:hover {
+    background-color: #8b0000; /* Darker red on hover */
+}

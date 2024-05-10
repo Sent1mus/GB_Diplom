@@ -1,155 +1,62 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
-<div>
+<div class="user-profile-container">
     <h1>Добро пожаловать в личный кабинет</h1>
-    <div id="email-container">
-        <span>Ваш Email: </span>
-        <span id="email-value">{{ user.email }}</span>
-        <button onclick="toggleEdit('email')">Изменить</button>
-        <input type="email" id="email-input" value="{{ user.email }}" style="display:none;">
-        <button onclick="save('email')" style="display:none;">Сохранить</button>
+    <div class="profile-section">
+        <div class="profile-row">
+            <div class="profile-column">
+                <span>Ваш Email: </span>
+                <span id="email-value">{{ user.email }}</span>
+            </div>
+            <div class="profile-column">
+                <button onclick="toggleEdit('email')">Изменить</button>
+                <input type="email" id="email-input" value="{{ user.email }}" style="display: inline;">
+                <button onclick="save('email')" style="display:none;">Сохранить</button>
+            </div>
+        </div>
+        <div class="profile-row">
+            <div class="profile-column">
+                <span>Ваш Телефон: </span>
+                <span id="phone-value">{{ user.customer.phone }}</span>
+            </div>
+            <div class="profile-column">
+                <button onclick="toggleEdit('phone')">Изменить</button>
+                <input type="text" id="phone-input" value="{{ user.customer.phone }}" style="display:none;">
+                <button onclick="save('phone')" style="display:none;">Сохранить</button>
+            </div>
+        </div>
+        <div class="profile-row">
+            <div class="profile-column">
+                <span>Дата рождения: </span>
+                <span>{{ user.customer.birth_date|date:"j F Y г." }}</span>
+            </div>
+            <div class="profile-column">
+                <button onclick="togglePasswordChange()">Изменить пароль</button>
+                <div id="password-change" style="display:none;">
+                    <input type="password" id="old-password" placeholder="Старый пароль">
+                    <input type="password" id="new-password" placeholder="Новый пароль">
+                    <input type="password" id="confirm-password" placeholder="Подтвердите пароль">
+                    <button onclick="changePassword()">Сохранить пароль</button>
+                </div>
+            </div>
+        </div>
+        <div class="profile-button-row">
+            <a href="{% url 'list_booking' %}" class="link-as-button booking-button">Просмотреть историю бронирований</a>
+        </div>
+        <div class="profile-button-row">
+            <button onclick="deactivateProfile()" class="link-as-button delete-profile-button">Удалить профиль</button>
+        </div>
     </div>
-    <div id="phone-container">
-        <span>Ваш Телефон: </span>
-        <span id="phone-value">{{ user.customer.phone }}</span>
-        <button onclick="toggleEdit('phone')">Изменить</button>
-        <input type="text" id="phone-input" value="{{ user.customer.phone }}" style="display:none;">
-        <button onclick="save('phone')" style="display:none;">Сохранить</button>
-    </div>
-    <div>
-        <span>Дата рождения: </span>
-        <span>{{ user.customer.birth_date|date:"j F Y г." }}</span>
-    </div>
-    <button onclick="togglePasswordChange()">Изменить пароль</button>
-    <div id="password-change" style="display:none;">
-        <input type="password" id="new-password" placeholder="Новый пароль">
-        <input type="password" id="confirm-password" placeholder="Подтвердите пароль">
-        <button onclick="changePassword()">Сохранить пароль</button>
-    </div>
-    <button onclick="deactivateProfile()">Удалить профиль</button>
-    <a href="{% url 'list_booking' %}">Просмотреть историю бронирований</a>
+</div>
+<!-- Hidden input to store URLs for JavaScript -->
+<div id="data-container"
+     data-update-profile-url="{% url 'update_profile' %}"
+     data-change-password-url="{% url 'change_password' %}"
+     data-deactivate-profile-url="{% url 'deactivate_profile' %}">
 </div>
 
-<!-- Hidden input to store URLs for JavaScript -->
-<input type="hidden" id="updateProfileUrl" value="{% url 'update_profile' %}">
-<input type="hidden" id="changePasswordUrl" value="{% url 'change_password' %}">
-<input type="hidden" id="deactivateProfileUrl" value="{% url 'deactivate_profile' %}">
-
-<script>
-function getCSRFToken() {
-    let cookies = document.cookie.split(';');
-    for (let cookie of cookies) {
-        let [name, value] = cookie.trim().split('=');
-        if (name === 'csrftoken') {
-            return decodeURIComponent(value);
-        }
-    }
-    return null;
-}
-
-function toggleEdit(field) {
-    let span = document.getElementById(field + '-value');
-    let input = document.getElementById(field + '-input');
-    let editButton = span.nextElementSibling;
-    let saveButton = input.nextElementSibling;
-
-    if (input.style.display === 'none') {
-        span.style.display = 'none';
-        input.style.display = 'inline';
-        editButton.style.display = 'none';
-        saveButton.style.display = 'inline';
-    } else {
-        span.style.display = 'inline';
-        input.style.display = 'none';
-        editButton.style.display = 'inline';
-        saveButton.style.display = 'none';
-    }
-}
-
-function save(field) {
-    let input = document.getElementById(field + '-input');
-    let span = document.getElementById(field + '-value');
-    let value = input.value;
-    let csrfToken = getCSRFToken();
-    let updateProfileUrl = document.getElementById('updateProfileUrl').value;
-
-    fetch(updateProfileUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrfToken
-        },
-        body: JSON.stringify({field: field, value: value})
-    }).then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            span.textContent = value;
-            toggleEdit(field);
-        } else {
-            alert('Ошибка при сохранении данных');
-        }
-    });
-}
-
-function togglePasswordChange() {
-    let container = document.getElementById('password-change');
-    container.style.display = container.style.display === 'none' ? 'block' : 'none';
-}
-
-function changePassword() {
-    let newPassword = document.getElementById('new-password').value;
-    let confirmPassword = document.getElementById('confirm-password').value;
-    let csrfToken = getCSRFToken();
-    let changePasswordUrl = document.getElementById('changePasswordUrl').value;
-
-    // Проверка на пустоту пароля
-    if (!newPassword.trim() || !confirmPassword.trim()) {
-        alert('Пароль не может быть пустым');
-        return;
-    }
-
-    // Проверка на совпадение паролей
-    if (newPassword !== confirmPassword) {
-        alert('Пароли не совпадают');
-        return;
-    }
-
-    fetch(changePasswordUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrfToken
-        },
-        body: JSON.stringify({new_password: newPassword})
-    }).then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Пароль успешно изменен');
-            togglePasswordChange();
-        } else {
-            alert('Ошибка при изменении пароля');
-        }
-    });
-}
-
-function deactivateProfile() {
-    let csrfToken = getCSRFToken();
-    let deactivateProfileUrl = document.getElementById('deactivateProfileUrl').value;
-
-    fetch(deactivateProfileUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrfToken
-        }
-    }).then(response => {
-        if (response.ok) {
-            window.location.href = "/logout/";
-        } else {
-            alert('Ошибка при удалении профиля');
-        }
-    });
-}
-</script>
+<script src="../static/js/user_profile.js"></script>
 {% endblock %}

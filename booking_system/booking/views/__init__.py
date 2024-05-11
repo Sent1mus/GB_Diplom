@@ -1,3 +1,5 @@
+import datetime
+
 from django.shortcuts import render
 
 from ..models import *
@@ -36,6 +38,19 @@ def get_reviews():
 
 def get_bookings():
     return Booking.objects.all()
+
+
+class BookingValidator:
+    @staticmethod
+    def is_slot_available(service_provider_id, appointment_datetime):
+        # Предполагаем, что каждое бронирование длится 1 час
+        end_time = appointment_datetime + datetime.timedelta(hours=1)
+        overlapping_bookings = Booking.objects.filter(
+            service_provider_id=service_provider_id,
+            appointment_datetime__lt=end_time,
+            appointment_datetime__gte=appointment_datetime
+        ).exists()
+        return not overlapping_bookings
 
 
 def list_all_db(request):

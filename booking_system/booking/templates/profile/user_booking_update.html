@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container user-booking-update">
+    <h1>Update Booking</h1>
+    <form method="post" id="bookingForm">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+</div>
+
+{% if error_message %}
+<script>
+    alert("{{ error_message|escapejs }}");
+</script>
+{% endif %}
+{% endblock %}

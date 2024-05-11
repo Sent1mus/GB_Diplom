@@ -25,8 +25,8 @@ urlpatterns = [
     path('profile/deactivate_profile/', deactivate_user_profile, name='deactivate_profile'),
 
     path('profile/list_booking', list_booking, name='list_booking'),
-    path('user_profile/bookings/update/<int:pk>/', user_booking_update, name='user_booking_update'),
-    path('user_profile/bookings/delete/<int:pk>/', user_booking_delete, name='user_booking_delete'),
+    path('profile/booking/update/<int:pk>/', user_booking_update, name='user_booking_update'),
+    path('profile/booking/delete/<int:pk>/', user_booking_delete, name='user_booking_delete'),
     path('list/', list_all_db, name='list'),
 ]
 

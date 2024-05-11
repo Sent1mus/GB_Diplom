@@ -7,29 +7,32 @@
     <title>{% block title %}Beauty Saloon{% endblock %}</title>
 </head>
 <body>
-    <header>
-        <nav class="nav-container">
-            <ul>
-                <li><a href="{% url 'main' %}" class="nav-link">Главная</a></li>
-                <li><a href="{% url 'about_us' %}" class="nav-link">О салоне</a></li>
-                <li><a href="{% url 'services' %}" class="nav-link">Наши услуги</a></li>
-                {% if request.user.is_authenticated %}
-                <li><a href="{% url 'user_profile' %}" class="nav-link">Профиль</a></li>
-                <li><a href="{% url 'logout' %}" class="nav-link">Выйти</a></li>
-                {% else %}
-                <li><a href="{% url 'signup' %}" class="nav-link">Регистрация</a></li>
-                <li><a href="{% url 'login' %}" class="nav-link">Войти</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
+<header>
+    <nav class="nav-container">
+        <ul class="navlist">
+            <li><a href="{% url 'about_us' %}" class="nav-link">ABOUT</a></li>
+            <li><a href="{% url 'services' %}" class="nav-link">SERVICES</a></li>
+            <li><a href="{% url 'main' %}" class="nav-link"><img src="{% static 'images/main_logo.png' %}" alt="Logo"></a></li>
+            {% if request.user.is_authenticated %}
+            <li><a href="{% url 'user_profile' %}" class="nav-link">PROFILE</a></li>
+            <li><a href="{% url 'logout' %}" class="nav-link">LOGOUT</a></li>
+            {% else %}
+            <li><a href="{% url 'signup' %}" class="nav-link">REGISTER</a></li>
+            <li><a href="{% url 'login' %}" class="nav-link">SIGN IN</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+<main>
     {% block content %}
     {% endblock %}
-    <footer>
-        {% block footer %}
-        {% endblock %}
-    </footer>
-    {% block javascript %}
+</main>
+<footer>
+    <p>© 2024 Beauty Saloon. Все права защищены.</p>
+    {% block footer %}
     {% endblock %}
+</footer>
+{% block javascript %}
+{% endblock %}
 </body>
 </html>

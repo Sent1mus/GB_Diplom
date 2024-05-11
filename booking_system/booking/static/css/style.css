@@ -1,31 +1,52 @@
 /* Основные стили для всего тела документа */
 body {
     margin: 0;
-    padding-top: 60px;
     font-family: 'Fira Sans', sans-serif;
     background-color: #333;
     color: #ccc;
 }
-
+footer {
+    color: gold; /* Change text color to gold */
+    text-align: center; /* Center the text */
+    position: absolute; /* Positioning it at the bottom */
+    bottom: 0;
+    width: 100%;
+}
+main{
+    padding:200px;
+}
 /* Стили для контейнера навигации */
 .nav-container {
-    display: flex;
-    align-items: center; /* Vertically center the content */
-    justify-content: flex-end; /* Horizontally center the content */
+    height: 100px; /* Изменено с 300px на fit-content */
+    width: 100%;
     position: fixed;
     top: 0;
-    right: 0;
-    background-color: #161618; /* Grey background */
-    width: 100%;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Изменено с flex-end на center */
+    background-color: #111111;
     z-index: 1000;
+    box-sizing: border-box;
+}
+.nav-link img {
+    width: 100%; /* Fill the entire width of li */
+    height: 100px; /* Maintain aspect ratio */
+    object-fit: contain;
+}
+/* Стили для списка в навигационном контейнере */
+.nav-container {
+    font-size: 24px; /* Increase font size */
+    text-align: center; /* Center text */
 }
 
-/* Стили для списка в навигационном контейнере */
 .nav-container ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 10px;
     display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    list-style-type: none; /* Remove list styles */
+    margin: 0;
+    padding: 0;
 }
 
 /* Стили для ссылок, кнопок и форм в навигационном контейнере */
@@ -33,7 +54,6 @@ body {
     text-decoration: none;
     color: gold;
     margin-left: 20px;
-    padding: 5px 10px;
     border-radius: 5px;
     background-color: transparent;
     border: none;
@@ -59,14 +79,41 @@ body {
     width: auto; /* Автоматическая ширина по содержимому */
 }
 
+.nav-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navlist {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    justify-content: space-around; /* Distributes space evenly between items */
+}
+
+.navlist li {
+    flex-grow: 1; /* Allows each li to grow and fill the space */
+    text-align: center; /* Centers the content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-img {
+    width: 100%; /* Makes the image responsive */
+    height: auto; /* Maintains the aspect ratio */
+    max-height: 100px; /* Maximum height of the image */
+}
 .header-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
     text-align: center;
-    margin-top: 60px;
 }
 
 /* Base styling for the services table */
@@ -97,13 +144,11 @@ body {
 /* Styling for forms within the table */
 .services form {
     display: block; /* Ensure the form takes the full cell space */
-    margin-top: 10px; /* Margin at the top of the form for spacing */
 }
 
 .services input, .services select, .services button {
     width: 100%; /* Full width for inputs, selects, and buttons */
     padding: 10px; /* Padding for better touch interaction */
-    margin-top: 5px; /* Space between form elements */
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
@@ -132,7 +177,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 50vh;
     width: 100%;
 }
 
@@ -168,7 +212,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 50vh; /* Высота контейнера изменена на 100vh для полного центрирования по вертикали */
 }
 
 .login-container h2 {
@@ -202,7 +245,6 @@ body {
     padding: 20px;
     color: #ccc;
     background-color: #333;
-    min-height: 100vh;
 }
 
 /* Стили для каждого раздела в профиле */
@@ -240,7 +282,6 @@ body {
 .profile-section button, .profile-input, input[type="email"], input[type="text"], input[type="password"] {
     width: auto; /* Adjust width as per content */
     padding: 10px;
-    margin-top: 5px;
     border: 1px solid #ccc;
     background-color: gold;
     color: #333;
@@ -330,6 +371,7 @@ body {
 /* Rows and cells within the table */
 .order-history__row {}
 .order-history__cell {
+    height: 30px;
     padding: 3px;
     border: 1px solid #ddd;
 }
@@ -369,3 +411,43 @@ body {
 .order-history__link--delete:hover{
     background-color: #8b0000; /* Darker red on hover */
 }
+
+.user-booking-update {
+        width: 50%;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: transparent; /* Transparent background */
+        border-radius: 5px;
+    }
+
+    .user-booking-update h1 {
+        color: #ссс;
+        text-align: center;
+    }
+
+    .user-booking-update form {
+        display: flex; /* Use flexbox to align form elements horizontally */
+        flex-direction: row; /* Align elements in a row */
+        justify-content: center; /* Center the elements horizontally */
+        align-items: center; /* Align the elements vertically */
+        gap: 10px; /* Space between form elements */
+    }
+
+    .user-booking-update form select {
+        width: 200px; /* Fixed width for all select elements */
+        padding: 10px; /* Padding for easier clicking */
+        text-overflow: ellipsis; /* Prevent text from overflowing */
+    }
+
+    .user-booking-update button {
+        background-color: #ffdd57; /* Yellow background */
+        color: black; /* Black text for better contrast */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .user-booking-update button:hover {
+        background-color: #ccaa46; /* Darker yellow on hover */
+    }

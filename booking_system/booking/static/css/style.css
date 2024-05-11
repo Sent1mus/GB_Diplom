@@ -38,7 +38,7 @@ body {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 24px;
     display: inline-flex; /* Ensures form is inline and items are aligned */
     align-items: center; /* Center align the button vertically */
 }
@@ -292,5 +292,80 @@ body {
 }
 
 .profile-button-row .delete-profile-button:hover {
+    background-color: #8b0000; /* Darker red on hover */
+}
+
+/* Base block for order history */
+.order-history {
+    width: 50%;
+    margin: auto;
+    }
+
+/* Header within the order history block */
+.order-history__header {
+    text-align: center;
+}
+
+/* Table container within the order history block */
+.order-history__table-container {
+    margin: 20px;
+    background-color: transparent;
+    border-radius: 8px;
+}
+
+/* Table styling within the order history block */
+.order-history__table {
+    width: 80%; /* or your desired width */
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+/* Column headers within the table */
+.order-history__column-header {
+    padding: 10px;
+    text-align: center;
+}
+
+/* Rows and cells within the table */
+.order-history__row {}
+.order-history__cell {
+    padding: 3px;
+    border: 1px solid #ddd;
+}
+/* Container for the action links */
+.order-history__actions-container {
+    display: flex;
+    width: 100%;}
+
+/* Ensure each link takes up half the container width */
+.order-history__link {
+    flex: 1; /* Flex grow to fill the space */
+    text-align: center; /* Center the text inside the link */
+}
+/* Link styling within the table cells */
+.order-history__link {
+    padding: 8px 12px;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* Modifier for edit link */
+.order-history__link--edit {
+
+    background-color: #007bff; /* Initial blue background for both */
+}
+.order-history__link--edit:hover{
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Modifier for delete link */
+.order-history__link--delete {
+    background-color: #ff0000; /* Red background */
+}
+
+.order-history__link--delete:hover{
     background-color: #8b0000; /* Darker red on hover */
 }

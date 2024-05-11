@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from ..forms import *
+from ..forms import BookingDateTimeForm
 from ..models import Booking, Customer
 from django.contrib.auth.decorators import login_required
 
@@ -17,12 +17,12 @@ def list_booking(request):
 def user_booking_update(request, pk):
     booking = get_object_or_404(Booking, pk=pk)
     if request.method == 'POST':
-        form = BookingForm(request.POST, instance=booking)
+        form = BookingDateTimeForm(request.POST, instance=booking)
         if form.is_valid():
             form.save()
             return redirect('booking_list')
     else:
-        form = BookingForm(instance=booking)
+        form = BookingDateTimeForm(instance=booking)
     return render(request, 'booking_form.html', {'form': form})
 
 @login_required

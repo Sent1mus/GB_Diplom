@@ -45,7 +45,7 @@ class Booking(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     service_provider = models.ForeignKey(ServiceProvider, on_delete=models.CASCADE)
-    appointment_datetime = models.DateTimeField(default=timezone.now) #TODO удалить default после сдачи, нужно для заполнения бд коммандой
+    appointment_datetime = models.DateTimeField(default=timezone.now) #TODO удалить default после сдачи, нужно для заполнения бд командой
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
@@ -53,11 +53,10 @@ class Booking(models.Model):
 
 
 class Review(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    service = models.ForeignKey(Service, on_delete=models.CASCADE)
-    service_provider = models.ForeignKey(ServiceProvider, on_delete=models.CASCADE)  # Add ServiceProvider reference
+    booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
     rating = models.IntegerField(default=1, choices=[(i, i) for i in range(1, 6)])
     comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)  # Automatically set when the review is created
 
     def __str__(self):
-        return f"Review by {self.customer.user.username} for {self.service.name} provided by {self.service_provider.user.username}"
+        return f"Review by {self.booking.customer.user.username} for {self.booking.service.name} provided by {self.booking.service_provider.user.username}"

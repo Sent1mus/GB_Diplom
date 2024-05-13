@@ -2,15 +2,15 @@
 
 {% block content %}
 <div class="order-history">
-    <h1 class="order-history__header">История заказов</h1>
+    <h1 class="order-history__header">Booking history</h1>
     <div class="order-history__table-container">
         <table class="order-history__table">
             <thead>
             <tr>
-                <th class="order-history__column-header">Услуга</th>
-                <th class="order-history__column-header">Мастер</th>
-                <th class="order-history__column-header">Время предоставления услуги</th>
-                <th class="order-history__column-header">Действия</th>
+                <th class="order-history__column-header">Service</th>
+                <th class="order-history__column-header">Master</th>
+                <th class="order-history__column-header">Date and time of service</th>
+                <th class="order-history__column-header">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -23,18 +23,22 @@
                     <div class="order-history__actions-container">
                         {% if booking.appointment_datetime > now %}
                         <a href="{% url 'user_booking_update' booking.id %}"
-                           class="order-history__link order-history__link--edit">Изменить</a>
+                           class="order-history__link order-history__link--edit">Change booking</a>
                         <a href="#" class="order-history__link order-history__link--delete" data-id="{{ booking.id }}"
-                           onclick="confirmDelete(event, this)">Удалить заказ</a>
+                           onclick="confirmDelete(event, this)">Cancel booking</a>
                         {% else %}
-                        <a>Нельзя изменить или удалить данный заказ</a>
+                        {% if booking.review_set.exists %}
+                        <a href="{% url 'add_review' booking.id %}" class="order-history__link order-history__link--review">Change review</a>
+                        {% else %}
+                        <a href="{% url 'add_review' booking.id %}" class="order-history__link order-history__link--review">Leave review</a>
+                        {% endif %}
                         {% endif %}
                     </div>
                 </td>
             </tr>
             {% empty %}
             <tr class="order-history__row">
-                <td colspan="4" class="order-history__cell">Нет заказов.</td>
+                <td colspan="4" class="order-history__cell">No bookings.</td>
             </tr>
             {% endfor %}
             </tbody>

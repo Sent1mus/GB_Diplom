@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="reviews-container">
+    <h1>Reviews for {{ service.name }}</h1>
+    <table>
+        {% for review in reviews %}
+        <tr>
+            <th>Rating</th>
+            <th><strong>Comment by User: {{ review.booking.customer.user.username }}</strong><br></th>
+        </tr>
+
+        <tr>
+            <td>{{ review.rating }}</td>
+            <td>
+
+                Review: {{ review.comment }}<br><br>
+                Review created at: <small>{{ review.created_at|date:"Y-m-d" }}</small>
+            </td>
+        </tr>
+        {% empty %}
+            <h3>No reviews available.</h3>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

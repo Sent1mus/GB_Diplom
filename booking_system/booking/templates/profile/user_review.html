@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="review-form">
+    <h1>Оставить отзыв</h1>
+    <form method="post" action="{% url 'add_review' booking_id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Review</button>
+    </form>
+</div>
+{% endblock %}

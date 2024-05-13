@@ -4,50 +4,50 @@
 
 {% block content %}
 <div class="user-profile-container">
-    <h1>Добро пожаловать в личный кабинет</h1>
+    <h1>Welcome to Your Profile</h1>
     <div class="profile-section">
         <div class="profile-row">
             <div class="profile-column">
-                <span>Ваш Email: </span>
+                <span>Your Email: </span>
                 <span id="email-value">{{ user.email }}</span>
             </div>
             <div class="profile-column">
-                <button onclick="toggleEdit('email')">Изменить</button>
+                <button onclick="toggleEdit('email')">Edit</button>
                 <input type="email" id="email-input" value="{{ user.email }}" style="display: inline;">
-                <button onclick="save('email')" style="display:none;">Сохранить</button>
+                <button onclick="save('email')" style="display:none;">Save</button>
             </div>
         </div>
         <div class="profile-row">
             <div class="profile-column">
-                <span>Ваш Телефон: </span>
+                <span>Your Phone: </span>
                 <span id="phone-value">{{ user.customer.phone }}</span>
             </div>
             <div class="profile-column">
-                <button onclick="toggleEdit('phone')">Изменить</button>
+                <button onclick="toggleEdit('phone')">Edit</button>
                 <input type="text" id="phone-input" value="{{ user.customer.phone }}" style="display:none;">
-                <button onclick="save('phone')" style="display:none;">Сохранить</button>
+                <button onclick="save('phone')" style="display:none;">Save</button>
             </div>
         </div>
         <div class="profile-row">
             <div class="profile-column">
-                <span>Дата рождения: </span>
-                <span>{{ user.customer.birth_date|date:"j F Y г." }}</span>
+                <span>Date of Birth: </span>
+                <span>{{ user.customer.birth_date|date:"j F Y" }}</span>
             </div>
             <div class="profile-column">
-                <button onclick="togglePasswordChange()">Изменить пароль</button>
+                <button onclick="togglePasswordChange()">Change Password</button>
                 <div id="password-change" style="display:none;">
-                    <input type="password" id="old-password" placeholder="Старый пароль">
-                    <input type="password" id="new-password" placeholder="Новый пароль">
-                    <input type="password" id="confirm-password" placeholder="Подтвердите пароль">
-                    <button onclick="changePassword()">Сохранить пароль</button>
+                    <input type="password" id="old-password" placeholder="Old Password">
+                    <input type="password" id="new-password" placeholder="New Password">
+                    <input type="password" id="confirm-password" placeholder="Confirm Password">
+                    <button onclick="changePassword()">Save Password</button>
                 </div>
             </div>
         </div>
         <div class="profile-button-row">
-            <a href="{% url 'list_booking' %}" class="link-as-button booking-button">Просмотреть историю бронирований</a>
+            <a href="{% url 'list_booking' %}" class="link-as-button booking-button">View Booking History</a>
         </div>
         <div class="profile-button-row">
-            <button onclick="deactivateProfile()" class="link-as-button delete-profile-button">Удалить профиль</button>
+            <button onclick="deactivateProfile()" class="link-as-button delete-profile-button">Delete Profile</button>
         </div>
     </div>
 </div>

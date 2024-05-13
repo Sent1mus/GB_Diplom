@@ -59,7 +59,6 @@ main {
     text-decoration: none; /* Убираем подчеркивание */
     color: gold; /* Цвет текста золотой */
     margin-left: 20px; /* Отступ слева */
-    border-radius: 5px; /* Скругление углов */
     background-color: transparent; /* Прозрачный фон */
     border: none; /* Без рамки */
     cursor: pointer; /* Курсор в виде указателя */
@@ -119,6 +118,12 @@ main {
     text-align: center; /* Выравнивание текста по центру */
 }
 
+.services {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Aligns children to the bottom */
+}
+
 /* Основные стили для таблицы услуг */
 .services table {
     width: 80%; /* Ширина таблицы */
@@ -130,6 +135,7 @@ main {
 
 /* Стили для ячеек и заголовков в таблице услуг */
 .services td, .services th {
+    position: relative;
     border: 1px solid gold; /* Граница золотого цвета */
     padding: 8px; /* Внутренние отступы в ячейках */
     text-align: left; /* Выравнивание текста по левому краю */
@@ -161,6 +167,7 @@ main {
 
 /* Стили для кнопок в блоке услуг */
 .services button {
+    font-size: 16px;
     background-color: gold; /* Фоновый цвет кнопок золотой */
     color: black; /* Цвет текста черный */
     border: none; /* Без рамки для более чистого вида */
@@ -169,7 +176,25 @@ main {
 }
 
 /* Стили для кнопок при наведении */
-.services button:hover {
+.services .link-as-button {
+    font-size: 16px;
+    position: absolute; /* Абсолютное позиционирование относительно ближайшего позиционированного предка */
+    bottom: 8px; /* Прикрепляет кнопку к нижней части */
+    left: 8px; /* Выравнивает кнопку по левому краю */
+    right: 8px; /* Выравнивает кнопку по правому краю */
+    height: 35px; /* Высота кнопки */
+    width: auto; /* Ширина в зависимости от содержимого */
+    background-color: gold; /* Цвет фона */
+    color: black; /* Цвет текста */
+    text-align: center; /* Центрирование текста внутри кнопки */
+    line-height: 35px; /* Высота строки текста */
+    text-decoration: none; /* Убирает подчеркивание у ссылок */
+    border: none; /* Без рамки */
+    cursor: pointer; /* Курсор в виде указателя при наведении */
+    transition: background-color 0.3s; /* Плавный переход цвета фона */
+}
+
+.services .link-as-button:hover, button:hover {
     background-color: #d4af37; /* Темно-золотой цвет при наведении */
 }
 
@@ -266,7 +291,6 @@ main {
     margin: 20px 0; /* Вертикальные отступы для разделения разделов */
     padding: 20px; /* Внутренний отступ */
     background-color: #161618; /* Цвет фона темно-серый */
-    border-radius: 8px; /* Скругление углов */
     box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Тень для элемента */
     display: flex; /* Использование flexbox для выравнивания */
     flex-direction: column; /* Элементы расположены вертикально */
@@ -297,12 +321,11 @@ main {
 
 /* Секция профиля: кнопки и поля ввода */
 .profile-section button, .profile-input, input[type="email"], input[type="text"], input[type="password"] {
+    border: 0px;
     width: auto; /* Автоматическая ширина в зависимости от содержимого */
     padding: 10px; /* Отступы вокруг текста */
-    border: 1px solid #ccc; /* Граница серого цвета */
     background-color: gold; /* Золотой фон */
     color: #333; /* Цвет текста темно-серый */
-    border-radius: 5px; /* Скругленные углы */
 }
 
 /* Изменение фона кнопок при наведении */
@@ -315,11 +338,13 @@ main {
     background-color: #fff; /* Белый фон */
     color: #333; /* Цвет текста темно-серый */
     border: none; /* Без границ */
-    border-radius: 5px; /* Скругленные углы */
     cursor: pointer; /* Курсор в виде указателя */
     transition: background-color 0.3s; /* Плавное изменение фона */
 }
 
+.profile-section button{
+    font-size: 16px;
+}
 /* Изменение фона при наведении на кнопки и поля ввода */
 .edit-button:hover, .save-button:hover, .profile-button:hover, input[type="email"]:hover, input[type="text"]:hover, input[type="password"]:hover {
     background-color: #d4af37; /* Темно-золотой фон при наведении */
@@ -336,13 +361,13 @@ main {
 /* Стилизация ссылок как кнопок */
 .profile-button-row .link-as-button, .profile-button-row .delete-profile-button {
     display: inline-block; /* Элементы в линию */
+    font-size: 16px;
     width: 50%; /* Ширина 50% от контейнера */
     background-color: #007bff; /* Синий фон */
     color: white; /* Белый текст */
     text-align: center; /* Текст по центру */
-    padding: 10px 20px; /* Отступы вокруг текста */
+    padding: 10px 0px; /* Отступы вокруг текста */
     text-decoration: none; /* Без подчеркивания текста */
-    border-radius: 5px; /* Скругленные углы */
     transition: background-color 0.3s; /* Плавное изменение фона */
 }
 
@@ -376,7 +401,6 @@ main {
 .order-history__table-container {
     margin: 20px; /* Отступы вокруг контейнера */
     background-color: transparent; /* Прозрачный фон */
-    border-radius: 8px; /* Скругленные углы */
 }
 
 /* Стилизация таблицы в блоке истории заказов */
@@ -414,8 +438,25 @@ main {
     padding: 8px 12px; /* Отступы вокруг текста */
     color: white; /* Белый текст */
     text-decoration: none; /* Без подчеркивания текста */
-    border-radius: 4px; /* Скругленные углы */
     display: inline-block; /* Элементы в линию */
+}
+
+/* Стилизация ссылки "Оставить отзыв" */
+.order-history__link--review {
+    position: relative; /* Относительное позиционирование для правильного выравнивания внутри ячейки таблицы */
+    display: inline-block; /* Отображение в виде блока для правильного размера */
+    padding: 8px 12px; /* Отступы вокруг текста */
+    background-color: gold; /* Золотой цвет фона */
+    color: black; /* Черный цвет текста */
+    text-align: center; /* Выравнивание текста по центру */
+    text-decoration: none; /* Без подчеркивания */
+    border: none; /* Без рамки */
+    cursor: pointer; /* Курсор в виде указателя при наведении */
+    transition: background-color 0.3s; /* Плавный переход цвета фона */
+}
+
+.order-history__link--review:hover {
+    background-color: #d4af37; /* Темно-золотой цвет при наведении */
 }
 
 /* Модификатор для ссылки редактирования */
@@ -440,17 +481,16 @@ main {
     margin: 0 auto; /* Центрирование */
     padding: 20px; /* Отступы вокруг блока */
     background-color: transparent; /* Прозрачный фон */
-    border-radius: 5px; /* Скругленные углы */
 }
 
 /* Заголовок в блоке обновления бронирования */
 .user-booking-update h1 {
-    color: #ссс; /* Цвет текста светло-серый */
+    color: #ccc; /* Цвет текста светло-серый */
     text-align: center; /* Текст по центру */
 }
 
 /* Форма в блоке обновления бронирования */
-.user-booking-update form {
+.user-booking-update .form-inline {
     display: flex; /* Элементы в строке */
     flex-direction: row; /* Элементы ориентированы горизонтально */
     justify-content: center; /* Центрирование по горизонтали */
@@ -460,12 +500,63 @@ main {
 
 /* Выпадающие списки в форме */
 .user-booking-update form select {
-    width: 200px; /* Фиксированная ширина */
+    width: 150px; /* Фиксированная ширина */
     padding: 10px; /* Отступы для удобства клика */
     text-overflow: ellipsis; /* Текст не выходит за границы */
 }
 
-/* Кнопки в форме */
-.user-booking-update button {
+/* Кнопка в форме */
+.user-booking-update .form-button {
+    font-size: 16px;
+    display: block;
+    width: 200px; /* Фиксированная ширина */
+    height: calc(2 * 40px); /* Высота в два раза больше стандартной высоты поля */
     background-color: #ffdd57; /* Желтый фон */
     color: black; /* Черный текст для контраста */
+}
+
+ /* Стили для контейнера отзывов */
+.reviews-container {
+    width: 50%; /* Ширина контейнера */
+    margin: 20px auto; /* Центрирование контейнера с вертикальными отступами */
+    text-align: center; /* Выравнивание текста по центру */
+    background-color: #333; /* Темно-серый фон */
+    color: #ccc; /* Светло-серый цвет текста */
+    padding: 20px; /* Внутренние отступы */
+}
+
+/* Стили для таблицы в контейнере отзывов */
+.reviews-container table {
+    width: 100%; /* Ширина таблицы на всю доступную ширину контейнера */
+    margin: auto; /* Автоматическое центрирование таблицы */
+    border-collapse: collapse; /* Убираем промежутки между ячейками */
+    border: 2px solid gold; /* Золотая граница вокруг таблицы */
+}
+
+/* Стили для заголовков ячеек в таблице отзывов */
+.reviews-container th {
+    text-align: center; /* Выравнивание текста заголовков по центру */
+    border-bottom: 1px solid gold; /* Золотая граница снизу заголовков */
+    padding: 10px; /* Внутренние отступы для заголовков */
+    background-color: #161618; /* Темно-серый фон для заголовков */
+    color: gold; /* Золотой цвет текста для заголовков */
+}
+
+/* Стили для ячеек в таблице отзывов */
+.reviews-container td {
+    padding: 8px; /* Внутренние отступы в ячейках */
+    text-align: center; /* Выравнивание текста в ячейках по центру */
+    border: 1px solid gold; /* Золотая граница вокруг каждой ячейки */
+    background-color: #222; /* Темно-серый фон для ячеек */
+}
+
+/* Стили для заголовка в контейнере отзывов */
+.reviews-container h1 {
+    margin-bottom: 20px; /* Отступ снизу для разделения заголовка и таблицы */
+    color: gold; /* Золотой цвет текста для заголовка */
+}
+
+/* Стили для сообщения, когда отзывов нет */
+.reviews-container h3 {
+    color: #ff0000; /* Ярко-красный цвет текста для сообщения об отсутствии отзывов */
+}

@@ -76,6 +76,12 @@ class EditProfileForm(forms.ModelForm):
         return instance
 
 
+class CustomPasswordChangeForm(PasswordChangeForm):
+    class Meta:
+        model = User
+        fields = ('old_password', 'new_password1', 'new_password2')
+
+
 class CustomModelChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, obj):
         return f"{obj.user.first_name} {obj.user.last_name} - {obj.specialization}"
@@ -104,8 +110,10 @@ class BookingDateTimeForm(forms.Form):
 
     # Fields
     month = forms.ChoiceField(choices=month_choices, initial=current_month)
-    day = forms.ChoiceField(choices=[(i, i) for i in range(1, calendar.monthrange(current_year, current_month)[1] + 1)], initial=current_day)
-    hour = forms.ChoiceField(choices=[(i, i) for i in range(9, 21)], initial=current_hour if 9 <= current_hour <= 20 else 9)
+    day = forms.ChoiceField(choices=[(i, i) for i in range(1, calendar.monthrange(current_year, current_month)[1] + 1)],
+                            initial=current_day)
+    hour = forms.ChoiceField(choices=[(i, i) for i in range(9, 21)],
+                             initial=current_hour if 9 <= current_hour <= 20 else 9)
 
     def clean(self):
         cleaned_data = super().clean()
@@ -131,9 +139,3 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ['rating', 'comment']
-
-
-class CustomPasswordChangeForm(PasswordChangeForm):
-    class Meta:
-        model = User
-        fields = ('old_password', 'new_password1', 'new_password2')

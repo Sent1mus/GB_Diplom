@@ -10,6 +10,7 @@
                 <p>{{ service.description }}</p>
                 <p>Duration: {{ service.duration }}</p>
                 <p>Price: {{ service.price }}</p>
+                <a href="{% url 'service_reviews' service.id %}" class="link-as-button">See all reviews</a>
             </td>
             <td>
                 <form method="post" action="">

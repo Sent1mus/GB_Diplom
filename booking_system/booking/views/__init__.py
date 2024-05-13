@@ -43,7 +43,6 @@ def get_bookings():
 class BookingValidator:
     @staticmethod
     def is_slot_available(service_provider_id, appointment_datetime):
-        # Предполагаем, что каждое бронирование длится 1 час
         end_time = appointment_datetime + datetime.timedelta(hours=1)
         overlapping_bookings = Booking.objects.filter(
             service_provider_id=service_provider_id,

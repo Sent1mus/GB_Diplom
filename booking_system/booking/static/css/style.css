@@ -1,453 +1,471 @@
 /* Основные стили для всего тела документа */
 body {
-    margin: 0;
-    font-family: 'Fira Sans', sans-serif;
-    background-color: #333;
-    color: #ccc;
-}
-footer {
-    color: gold; /* Change text color to gold */
-    text-align: center; /* Center the text */
-    position: absolute; /* Positioning it at the bottom */
-    bottom: 0;
-    width: 100%;
-}
-main{
-    padding:200px;
-}
-/* Стили для контейнера навигации */
-.nav-container {
-    height: 100px; /* Изменено с 300px на fit-content */
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Изменено с flex-end на center */
-    background-color: #111111;
-    z-index: 1000;
-    box-sizing: border-box;
-}
-.nav-link img {
-    width: 100%; /* Fill the entire width of li */
-    height: 100px; /* Maintain aspect ratio */
-    object-fit: contain;
-}
-/* Стили для списка в навигационном контейнере */
-.nav-container {
-    font-size: 24px; /* Increase font size */
-    text-align: center; /* Center text */
+    margin: 0; /* Убираем отступы */
+    font-family: 'Fira Sans', sans-serif; /* Устанавливаем шрифт для текста */
+    background-color: #333; /* Цвет фона темно-серый */
+    color: #ccc; /* Цвет текста светло-серый */
 }
 
+/* Стили для нижнего колонтитула */
+footer {
+    color: gold; /* Цвет текста золотой */
+    text-align: center; /* Выравнивание текста по центру */
+    position: absolute; /* Абсолютное позиционирование */
+    bottom: 0; /* Прижимаем к нижней части */
+    width: 100%; /* Ширина на всю доступную область */
+}
+
+/* Стили для основного содержимого */
+main {
+    padding: 200px; /* Внутренний отступ */
+}
+
+/* Стили для контейнера навигации */
+.nav-container {
+    height: 100px; /* Высота контейнера */
+    width: 100%; /* Ширина на всю доступную область */
+    position: fixed; /* Фиксированное позиционирование */
+    top: 0; /* Прижимаем к верхней части */
+    left: 0; /* Прижимаем к левой части */
+    display: flex; /* Используем flexbox для выравнивания элементов */
+    align-items: center; /* Центрирование элементов по вертикали */
+    justify-content: center; /* Центрирование элементов по горизонтали */
+    background-color: #111111; /* Цвет фона темно-черный */
+    z-index: 1000; /* Устанавливаем z-index для наложения элементов */
+    box-sizing: border-box; /* Размеры включают padding и border */
+    font-size: 24px; /* Размер шрифта */
+    text-align: center; /* Выравнивание текста по центру */
+}
+
+/* Стили для изображений в ссылках навигации */
+.nav-link img {
+    width: 100%; /* Ширина изображения на всю доступную область */
+    height: 100px; /* Высота изображения фиксированная */
+    object-fit: contain; /* Сохраняем пропорции изображения */
+}
+
+/* Стили для списка в навигационном контейнере */
 .nav-container ul {
-    display: flex;
-    align-items: center; /* Center items vertically */
-    justify-content: center; /* Center items horizontally */
-    list-style-type: none; /* Remove list styles */
-    margin: 0;
-    padding: 0;
+    display: flex; /* Используем flexbox для выравнивания элементов */
+    align-items: center; /* Центрирование элементов по вертикали */
+    justify-content: center; /* Центрирование элементов по горизонтали */
+    list-style-type: none; /* Убираем маркеры списка */
+    margin: 0; /* Убираем внешние отступы */
+    padding: 0; /* Убираем внутренние отступы */
 }
 
 /* Стили для ссылок, кнопок и форм в навигационном контейнере */
 .nav-container .nav-link, .nav-container .nav-button, .nav-container form {
-    text-decoration: none;
-    color: gold;
-    margin-left: 20px;
-    border-radius: 5px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    display: inline-flex; /* Ensures form is inline and items are aligned */
-    align-items: center; /* Center align the button vertically */
+    text-decoration: none; /* Убираем подчеркивание */
+    color: gold; /* Цвет текста золотой */
+    margin-left: 20px; /* Отступ слева */
+    border-radius: 5px; /* Скругление углов */
+    background-color: transparent; /* Прозрачный фон */
+    border: none; /* Без рамки */
+    cursor: pointer; /* Курсор в виде указателя */
+    font-size: 24px; /* Размер шрифта */
+    display: inline-flex; /* Вывод элементов в одну строку с возможностью выравнивания */
+    align-items: center; /* Центрирование элементов по вертикали */
 }
 
 /* Стили для ссылок и форм при наведении */
 .nav-container .nav-link:hover, .nav-container .nav-button:hover, .nav-container form:hover {
-    color: white;
-    background-color: transparent; /* Background does not change on hover */
+    color: white; /* Цвет текста белый при наведении */
+    background-color: transparent; /* Фон остается прозрачным */
 }
 
 /* Центрирование кнопок в формах */
 .nav-container form {
-    display: flex;
-    align-items: center; /* Центрирование по вертикали */
-    justify-content: center; /* Центрирование по горизонтали */
-    margin: 0 20px; /* Горизонтальные отступы, как у других ссылок */
-    padding: 5px 10px; /* Отступы внутри, как у других ссылок */
-    width: auto; /* Автоматическая ширина по содержимому */
+    display: flex; /* Используем flexbox для выравнивания элементов */
+    align-items: center; /* Центрирование элементов по вертикали */
+    justify-content: center; /* Центрирование элементов по горизонтали */
+    margin: 0 20px; /* Горизонтальные отступы */
+    padding: 5px 10px; /* Внутренние отступы */
+    width: auto; /* Ширина по содержимому */
 }
 
-.nav-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
+/* Стили для списка навигации */
 .navlist {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    justify-content: space-around; /* Distributes space evenly between items */
+    display: flex; /* Используем flexbox для выравнивания элементов */
+    list-style: none; /* Убираем маркеры списка */
+    padding: 0; /* Убираем внутренние отступы */
+    margin: 0; /* Убираем внешние отступы */
+    width: 100%; /* Ширина на всю доступную область */
+    justify-content: space-around; /* Равномерное распределение элементов с промежутками */
 }
 
+/* Стили для элементов списка в навигации */
 .navlist li {
-    flex-grow: 1; /* Allows each li to grow and fill the space */
-    text-align: center; /* Centers the content */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-grow: 1; /* Элементы растягиваются для заполнения доступного пространства */
+    text-align: center; /* Выравнивание текста по центру */
+    display: flex; /* Используем flexbox для выравнивания элементов */
+    justify-content: center; /* Центрирование элементов по горизонтали */
+    align-items: center; /* Центрирование элементов по вертикали */
 }
 
+/* Стили для изображений в навигации */
 .nav-img {
-    width: 100%; /* Makes the image responsive */
-    height: auto; /* Maintains the aspect ratio */
-    max-height: 100px; /* Maximum height of the image */
+    width: 100%; /* Ширина изображения на всю доступную область */
+    height: auto; /* Высота автоматическая, сохраняется пропорция */
+    max-height: 100px; /* Максимальная высота изображения */
 }
+
+/* Стили для содержимого заголовка */
 .header-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    display: flex; /* Используем flexbox для выравнивания элементов */
+    flex-direction: column; /* Элементы располагаются вертикально */
+    align-items: center; /* Центрирование элементов по вертикали */
+    justify-content: center; /* Центрирование элементов по горизонтали */
+    text-align: center; /* Выравнивание текста по центру */
 }
 
-/* Base styling for the services table */
+/* Основные стили для таблицы услуг */
 .services table {
-    width: 80%; /* Set the width of the table */
-    margin: 20px auto; /* Center the table horizontally and add some margin for spacing */
-    border-collapse: collapse; /* Collapse borders between table cells */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add a subtle shadow to make the table pop out */
-    border: 1px solid gold; /* Golden border for the table */
+    width: 80%; /* Ширина таблицы */
+    margin: 20px auto; /* Центрирование таблицы с вертикальными отступами */
+    border-collapse: collapse; /* Стиль границы, границы ячеек объединены */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Тень для таблицы */
+    border: 1px solid gold; /* Граница золотого цвета */
 }
 
+/* Стили для ячеек и заголовков в таблице услуг */
 .services td, .services th {
-    border: 1px solid gold; /* Light grey border for each cell */
-    padding: 8px; /* Padding inside cells for better text alignment */
-    text-align: left; /* Align text to the left */
+    border: 1px solid gold; /* Граница золотого цвета */
+    padding: 8px; /* Внутренние отступы в ячейках */
+    text-align: left; /* Выравнивание текста по левому краю */
 }
 
+/* Стили для заголовков в блоке услуг */
 .services h2 {
-    color: gold; /* Dark grey color for headings */
-    font-size: 24px; /* Larger font size for service name */
+    color: gold; /* Цвет текста золотой */
+    font-size: 24px; /* Размер шрифта */
 }
 
+/* Стили для параграфов в блоке услуг */
 .services p {
-    color: #ссс; /* Medium grey color for paragraph text */
-    margin: 5px 0; /* Add top and bottom margin to separate paragraphs from each other */
+    color: #ссс; /* Цвет текста серый */
+    margin: 5px 0; /* Отступы сверху и снизу для разделения параграфов */
 }
 
-/* Styling for forms within the table */
+/* Стили для форм внутри таблицы услуг */
 .services form {
-    display: block; /* Ensure the form takes the full cell space */
+    display: block; /* Форма занимает всю ширину ячейки */
 }
 
+/* Стили для элементов ввода, выбора и кнопок внутри форм */
 .services input, .services select, .services button {
-    width: 100%; /* Full width for inputs, selects, and buttons */
-    padding: 10px; /* Padding for better touch interaction */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    width: 100%; /* Ширина элементов на всю доступную ширину */
+    padding: 10px; /* Внутренний отступ для лучшего взаимодействия */
+    box-sizing: border-box; /* Размеры включают padding и border */
 }
 
+/* Стили для кнопок в блоке услуг */
 .services button {
-    background-color: gold; /* Green background for the button */
-    color: black; /* White text color */
-    border: none; /* No border for a cleaner look */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    background-color: gold; /* Фоновый цвет кнопок золотой */
+    color: black; /* Цвет текста черный */
+    border: none; /* Без рамки для более чистого вида */
+    cursor: pointer; /* Курсор в виде указателя */
+    transition: background-color 0.3s; /* Плавный переход цвета при наведении */
 }
 
+/* Стили для кнопок при наведении */
 .services button:hover {
-    background-color: #d4af37; /* Darker green when hovered */
+    background-color: #d4af37; /* Темно-золотой цвет при наведении */
 }
 
-/* Error message styling */
+/* Стили для сообщений об ошибках */
 .services p[style*="color: red;"] {
-    font-weight: bold; /* Make error messages bold */
-    color: #ff0000; /* Bright red color for visibility */
+    font-weight: bold; /* Жирный шрифт для сообщений */
+    color: #ff0000; /* Цвет текста ярко-красный */
 }
 
-
-/* Стили для центрированной формы с таблицей на страницы регистрации*/
+/* Стили для центрированной формы с таблицей на странице регистрации */
 .signup-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+    display: flex; /* Использование flexbox для выравнивания */
+    flex-direction: column; /* Элементы расположены вертикально */
+    justify-content: center; /* Центрирование элементов по вертикали */
+    align-items: center; /* Центрирование элементов по горизонтали */
+    width: 100%; /* Ширина контейнера на всю доступную ширину */
 }
 
+/* Стили для заголовков в контейнере регистрации */
 .signup-container h2 {
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Отступ снизу для разделения заголовка и формы */
 }
 
+/* Стили для таблицы в форме регистрации */
 .signup-container table {
-    border-collapse: collapse;
-    margin: auto;
-    width: 100%; /* Adjust width as needed */
+    border-collapse: collapse; /* Стиль границы, границы ячеек объединены */
+    margin: auto; /* Центрирование таблицы */
+    width: 100%; /* Ширина таблицы на всю доступную ширину */
 }
 
+/* Стили для ячеек в таблице регистрации */
 .signup-container td {
-    padding: 8px;
-    text-align: left;
+    padding: 8px; /* Внутренние отступы в ячейках */
+    text-align: left; /* Выравнивание текста по левому краю */
 }
 
+/* Стили для первой ячейки в строках таблицы регистрации */
 .signup-container td:first-child {
-    text-align: right;
-    padding-right: 20px;
+    text-align: right; /* Выравнивание текста по правому краю */
+    padding-right: 20px; /* Отступ справа */
 }
 
+/* Стили для кнопок регистрации */
 .signup-container .register-button {
-    width: 100%;
-    padding: 10px 0;
+    width: 100%; /* Ширина кнопки на всю доступную ширину */
+    padding: 10px 0; /* Вертикальный внутренний отступ для удобства нажатия */
 }
-/* Стили для центрированной формы с таблицей на страницы регистрации*/
 
-/* Стили для страницы логина*/
+/* Стили для контейнера страницы входа */
 .login-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: flex; /* Использование flexbox для выравнивания */
+    flex-direction: column; /* Элементы расположены вертикально */
+    justify-content: center; /* Центрирование элементов по вертикали */
+    align-items: center; /* Центрирование элементов по горизонтали */
 }
 
+/* Стили для заголовков на странице входа */
 .login-container h2 {
-    margin-bottom: 20px; /* Добавляем отступ между заголовком и формой */
+    margin-bottom: 20px; /* Отступ снизу для разделения заголовка и формы */
 }
 
+/* Стили для таблицы на странице входа */
 .login-container table {
-    width: 300px; /* Устанавливаем фиксированную ширину для таблицы */
-    border-collapse: collapse;
+    width: 300px; /* Фиксированная ширина таблицы */
+    border-collapse: collapse; /* Стиль границы, границы ячеек объединены */
 }
 
+/* Стили для ячеек на странице входа */
 .login-container td {
-    padding: 8px;
+    padding: 8px; /* Внутренние отступы в ячейках */
 }
 
+/* Стили для кнопок входа */
 .login-container .login-button {
-    width: 100%; /* Ширина кнопки, чтобы она занимала всю ширину таблицы */
-    padding: 10px 0; /* Добавляем паддинг для удобства нажатия */
+    width: 100%; /* Ширина кнопки на всю доступную ширину */
+    padding: 10px 0; /* Вертикальный внутренний отступ для удобства нажатия */
 }
-
-/* Стили для страницы логина*/
-
 
 /* Основные стили для контейнера профиля пользователя */
 .user-profile-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 20px;
-    color: #ccc;
-    background-color: #333;
+    display: flex; /* Использование flexbox для выравнивания */
+    flex-direction: column; /* Элементы расположены вертикально */
+    align-items: center; /* Центрирование элементов по горизонтали */
+    justify-content: center; /* Центрирование элементов по вертикали */
+    width: 100%; /* Ширина контейнера на всю доступную ширину */
+    padding: 20px; /* Внутренний отступ */
+    color: #ccc; /* Цвет текста светло-серый */
+    background-color: #333; /* Цвет фона темно-серый */
 }
 
-/* Стили для каждого раздела в профиле */
+/* Стили для каждого раздела в профиле пользователя */
 .profile-section {
-    width: 50%;
-    margin: 20px 0;
-    padding: 20px;
-    background-color: #161618;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    width: 50%; /* Ширина раздела 50% от ширины контейнера */
+    margin: 20px 0; /* Вертикальные отступы для разделения разделов */
+    padding: 20px; /* Внутренний отступ */
+    background-color: #161618; /* Цвет фона темно-серый */
+    border-radius: 8px; /* Скругление углов */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Тень для элемента */
+    display: flex; /* Использование flexbox для выравнивания */
+    flex-direction: column; /* Элементы расположены вертикально */
+    align-items: center; /* Центрирование элементов по горизонтали */
+    justify-content: center; /* Центрирование элементов по вертикали */
 }
 
+/* Стили для строк в разделах профиля */
 .profile-row {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 10px; /* Space between rows */
+    display: flex; /* Использование flexbox для выравнивания */
+    justify-content: space-between; /* Распределение элементов с промежутками */
+    width: 100%; /* Ширина строки на всю доступную ширину */
+    margin-bottom: 10px; /* Отступ снизу для разделения строк */
 }
 
+/* Стили для колонок в строках профиля */
 .profile-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 50%; /* Each column takes half the width of the row */
+    display: flex; /* Использование flexbox для выравнивания */
+    flex-direction: column; /* Элементы расположены вертикально */
+    justify-content: center; /* Центрирование элементов по вертикали */
+    width: 50%; /* Ширина колонки 50% от ширины строки */
 }
 
+/* Стили для ввода данных, кнопок редактирования и сохранения в профиле */
 .profile-input, .edit-button, .save-button {
-    display: none; /* Initially hidden, shown by JavaScript */
+    display: none; /* Элементы изначально скрыты, отображаются через JavaScript */
 }
 
+/* Секция профиля: кнопки и поля ввода */
 .profile-section button, .profile-input, input[type="email"], input[type="text"], input[type="password"] {
-    width: auto; /* Adjust width as per content */
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: gold;
-    color: #333;
-    border-radius: 5px;
+    width: auto; /* Автоматическая ширина в зависимости от содержимого */
+    padding: 10px; /* Отступы вокруг текста */
+    border: 1px solid #ccc; /* Граница серого цвета */
+    background-color: gold; /* Золотой фон */
+    color: #333; /* Цвет текста темно-серый */
+    border-radius: 5px; /* Скругленные углы */
 }
 
+/* Изменение фона кнопок при наведении */
 .profile-section button:hover {
-    background-color: #d4af37;
+    background-color: #d4af37; /* Темно-золотой фон при наведении */
 }
 
+/* Стилизация кнопок и полей ввода */
 .edit-button, .save-button, .profile-button, input[type="email"], input[type="text"], input[type="password"] {
-    background-color: #fff;
-    color: #333;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    background-color: #fff; /* Белый фон */
+    color: #333; /* Цвет текста темно-серый */
+    border: none; /* Без границ */
+    border-radius: 5px; /* Скругленные углы */
+    cursor: pointer; /* Курсор в виде указателя */
+    transition: background-color 0.3s; /* Плавное изменение фона */
 }
 
+/* Изменение фона при наведении на кнопки и поля ввода */
 .edit-button:hover, .save-button:hover, .profile-button:hover, input[type="email"]:hover, input[type="text"]:hover, input[type="password"]:hover {
-    background-color: #d4af37;
+    background-color: #d4af37; /* Темно-золотой фон при наведении */
 }
 
+/* Расположение кнопок в строке */
 .profile-button-row {
-    display: flex;
-    justify-content: center; /* Center the button horizontally */
-    width: 100%; /* Full width to contain the button */
-    margin: 10px 0; /* Space above and below the row */
+    display: flex; /* Элементы в строке */
+    justify-content: center; /* Центрирование по горизонтали */
+    width: 100%; /* Ширина 100% */
+    margin: 10px 0; /* Отступ сверху и снизу */
 }
 
+/* Стилизация ссылок как кнопок */
 .profile-button-row .link-as-button, .profile-button-row .delete-profile-button {
-    display: inline-block; /* Allows the width to be set */
-    width: 50%; /* Set the width to 50% of its container */
-    background-color: #007bff; /* Initial blue background for both */
-    color: white;
-    text-align: center;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    display: inline-block; /* Элементы в линию */
+    width: 50%; /* Ширина 50% от контейнера */
+    background-color: #007bff; /* Синий фон */
+    color: white; /* Белый текст */
+    text-align: center; /* Текст по центру */
+    padding: 10px 20px; /* Отступы вокруг текста */
+    text-decoration: none; /* Без подчеркивания текста */
+    border-radius: 5px; /* Скругленные углы */
+    transition: background-color 0.3s; /* Плавное изменение фона */
 }
 
+/* Изменение фона ссылки при наведении */
 .profile-button-row .link-as-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3; /* Темно-синий фон при наведении */
 }
 
+/* Красный фон для кнопки удаления профиля */
 .profile-button-row .delete-profile-button {
-    background-color: #ff0000; /* Red background */
+    background-color: #ff0000; /* Красный фон */
 }
 
+/* Темно-красный фон при наведении на кнопку удаления */
 .profile-button-row .delete-profile-button:hover {
-    background-color: #8b0000; /* Darker red on hover */
+    background-color: #8b0000; /* Темно-красный фон при наведении */
 }
 
-/* Base block for order history */
+/* Базовый блок для истории заказов */
 .order-history {
-    width: 50%;
-    margin: auto;
-    }
+    width: 50%; /* Ширина 50% */
+    margin: auto; /* Центрирование */
+}
 
-/* Header within the order history block */
+/* Заголовок в блоке истории заказов */
 .order-history__header {
-    text-align: center;
+    text-align: center; /* Текст по центру */
 }
 
-/* Table container within the order history block */
+/* Контейнер для таблицы в блоке истории заказов */
 .order-history__table-container {
-    margin: 20px;
-    background-color: transparent;
-    border-radius: 8px;
+    margin: 20px; /* Отступы вокруг контейнера */
+    background-color: transparent; /* Прозрачный фон */
+    border-radius: 8px; /* Скругленные углы */
 }
 
-/* Table styling within the order history block */
+/* Стилизация таблицы в блоке истории заказов */
 .order-history__table {
-    width: 80%; /* or your desired width */
-    margin-left: auto;
-    margin-right: auto;
-    border-collapse: collapse;
+    width: 80%; /* Ширина 80% */
+    margin-left: auto; /* Отступ слева автоматический */
+    margin-right: auto; /* Отступ справа автоматический */
+    border-collapse: collapse; /* Убрать промежутки между ячейками */
 }
 
-/* Column headers within the table */
+/* Заголовки столбцов в таблице */
 .order-history__column-header {
-    padding: 10px;
-    text-align: center;
+    padding: 10px; /* Отступы вокруг текста */
+    text-align: center; /* Текст по центру */
 }
 
-/* Rows and cells within the table */
+/* Строки и ячейки в таблице */
 .order-history__row {}
 .order-history__cell {
-    height: 30px;
-    padding: 3px;
-    border: 1px solid #ddd;
+    height: 30px; /* Высота ячейки 30px */
+    padding: 3px; /* Отступы вокруг текста */
+    border: 1px solid #ddd; /* Граница светло-серого цвета */
 }
-/* Container for the action links */
+
+/* Контейнер для ссылок действий */
 .order-history__actions-container {
-    display: flex;
-    width: 100%;}
-
-/* Ensure each link takes up half the container width */
-.order-history__link {
-    flex: 1; /* Flex grow to fill the space */
-    text-align: center; /* Center the text inside the link */
-}
-/* Link styling within the table cells */
-.order-history__link {
-    padding: 8px 12px;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    display: inline-block;
+    display: flex; /* Элементы в строке */
+    width: 100%; /* Ширина 100% */
 }
 
-/* Modifier for edit link */
+/* Стилизация ссылок в ячейках таблицы */
+.order-history__link {
+    flex: 1; /* Заполнить доступное пространство */
+    text-align: center; /* Текст по центру */
+    padding: 8px 12px; /* Отступы вокруг текста */
+    color: white; /* Белый текст */
+    text-decoration: none; /* Без подчеркивания текста */
+    border-radius: 4px; /* Скругленные углы */
+    display: inline-block; /* Элементы в линию */
+}
+
+/* Модификатор для ссылки редактирования */
 .order-history__link--edit {
-
-    background-color: #007bff; /* Initial blue background for both */
+    background-color: #007bff; /* Синий фон */
 }
 .order-history__link--edit:hover{
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3; /* Темно-синий фон при наведении */
 }
 
-/* Modifier for delete link */
+/* Модификатор для ссылки удаления */
 .order-history__link--delete {
-    background-color: #ff0000; /* Red background */
+    background-color: #ff0000; /* Красный фон */
 }
-
 .order-history__link--delete:hover{
-    background-color: #8b0000; /* Darker red on hover */
+    background-color: #8b0000; /* Темно-красный фон при наведении */
 }
 
+/* Блок обновления бронирования пользователя */
 .user-booking-update {
-        width: 50%;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: transparent; /* Transparent background */
-        border-radius: 5px;
-    }
+    width: 50%; /* Ширина 50% */
+    margin: 0 auto; /* Центрирование */
+    padding: 20px; /* Отступы вокруг блока */
+    background-color: transparent; /* Прозрачный фон */
+    border-radius: 5px; /* Скругленные углы */
+}
 
-    .user-booking-update h1 {
-        color: #ссс;
-        text-align: center;
-    }
+/* Заголовок в блоке обновления бронирования */
+.user-booking-update h1 {
+    color: #ссс; /* Цвет текста светло-серый */
+    text-align: center; /* Текст по центру */
+}
 
-    .user-booking-update form {
-        display: flex; /* Use flexbox to align form elements horizontally */
-        flex-direction: row; /* Align elements in a row */
-        justify-content: center; /* Center the elements horizontally */
-        align-items: center; /* Align the elements vertically */
-        gap: 10px; /* Space between form elements */
-    }
+/* Форма в блоке обновления бронирования */
+.user-booking-update form {
+    display: flex; /* Элементы в строке */
+    flex-direction: row; /* Элементы ориентированы горизонтально */
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
+    gap: 10px; /* Расстояние между элементами */
+}
 
-    .user-booking-update form select {
-        width: 200px; /* Fixed width for all select elements */
-        padding: 10px; /* Padding for easier clicking */
-        text-overflow: ellipsis; /* Prevent text from overflowing */
-    }
+/* Выпадающие списки в форме */
+.user-booking-update form select {
+    width: 200px; /* Фиксированная ширина */
+    padding: 10px; /* Отступы для удобства клика */
+    text-overflow: ellipsis; /* Текст не выходит за границы */
+}
 
-    .user-booking-update button {
-        background-color: #ffdd57; /* Yellow background */
-        color: black; /* Black text for better contrast */
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .user-booking-update button:hover {
-        background-color: #ccaa46; /* Darker yellow on hover */
-    }
+/* Кнопки в форме */
+.user-booking-update button {
+    background-color: #ffdd57; /* Желтый фон */
+    color: black; /* Черный текст для контраста */

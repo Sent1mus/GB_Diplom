@@ -27,7 +27,7 @@ class RegisterForm(UserCreationForm):
     )
     birth_date = forms.DateField(
         required=True,
-        input_formats=['%d.%m.%Y'],  # Ожидаемый формат даты
+        input_formats=['%d.%m.%Y'],
         widget=forms.DateInput(format='%d.%m.%Y', attrs={'placeholder': 'DD.MM.YYYY'})
     )
 
@@ -51,7 +51,7 @@ class RegisterForm(UserCreationForm):
             Customer.objects.create(
                 user=user,
                 phone=self.cleaned_data['phone'],
-                birth_date=self.cleaned_data['birth_date']  # Сохраняем дату рождения
+                birth_date=self.cleaned_data['birth_date']
             )
         return user
 
@@ -77,13 +77,7 @@ class EditProfileForm(forms.ModelForm):
 
 
 class CustomModelChoiceField(forms.ModelChoiceField):
-    def __init__(self, *args, **kwargs):
-        # Устанавливаем плейсхолдер с помощью empty_label
-        kwargs['empty_label'] = "Выберите мастера"
-        super().__init__(*args, **kwargs)
-
     def label_from_instance(self, obj):
-        """ Форматирует отображаемое имя для объектов ServiceProvider. """
         return f"{obj.user.first_name} {obj.user.last_name} - {obj.specialization}"
 
 
@@ -91,7 +85,7 @@ class ServiceProviderForm(forms.Form):
     service_provider = CustomModelChoiceField(
         queryset=ServiceProvider.objects.all(),
         widget=forms.Select(attrs={'id': 'service_provider'}),
-        label="Select Service Provider"
+        label="Select master"
     )
 
 

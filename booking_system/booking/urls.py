@@ -4,7 +4,7 @@ from .views.profile import user_profile, update_profile, change_user_password, d
 from .views.booking import list_booking, user_booking_update, user_booking_delete
 from .views.review import add_review, service_reviews
 from .views.service import services
-from .views import main_page, about_us, list_all_db
+from .views import main_page, about_us, temp_list_all_db
 
 urlpatterns = [
     path('', main_page, name='main'),
@@ -27,6 +27,6 @@ urlpatterns = [
     path('review/add/<int:booking_id>/', add_review, name='add_review'),
     path('reviews/<int:service_id>/', service_reviews, name='service_reviews'),
 
-    path('list/', list_all_db, name='list'),
+    path('list/', temp_list_all_db, name='list'),
 ]
 

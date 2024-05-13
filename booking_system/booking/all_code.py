@@ -26,7 +26,7 @@ add_files_from_directory(views_dir, source_files)
 add_files_from_directory(templates_dir, source_files)
 
 # Путь к целевому файлу
-target_file_path = r'W:\Study\000 Diplom\Project\booking_system\booking\ssssss.py'
+target_file_path = r'W:\Study\000 Diplom\Project\booking_system\booking\all_code.py'
 
 # Функция для добавления содержимого файла в другой файл
 def append_file_content(source_path, target_path):
@@ -49,4 +49,4 @@ def append_file_content(source_path, target_path):
 for file_path in source_files:
     append_file_content(file_path, target_file_path)
 
-print("Содержимое файлов успешно скопировано в ssssss.py")
+print("Содержимое файлов успешно скопировано в all_code.py")

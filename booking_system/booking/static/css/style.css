@@ -515,7 +515,7 @@ main {
     color: black; /* Черный текст для контраста */
 }
 
- /* Стили для контейнера отзывов */
+/* Стили для контейнера отзывов */
 .reviews-container {
     width: 50%; /* Ширина контейнера */
     margin: 20px auto; /* Центрирование контейнера с вертикальными отступами */
@@ -559,4 +559,46 @@ main {
 /* Стили для сообщения, когда отзывов нет */
 .reviews-container h3 {
     color: #ff0000; /* Ярко-красный цвет текста для сообщения об отсутствии отзывов */
+}
+
+/* Стили для select элемента (rating) */
+.reviews-container select{
+    width: 100%; /* Ширина на всю доступную ширину контейнера */
+    height: 40px; /* Высота элемента */
+    font-size: 16px; /* Размер шрифта */
+    color: black; /* Цвет текста */
+    background-color: #fff; /* Белый фон */
+    border: 1px solid #ccc; /* Серая граница */
+    padding: 5px 10px; /* Внутренние отступы */
+}
+
+/* Стили для textarea (comment) */
+.reviews-container textarea {
+    width: 100%; /* Ширина на всю доступную ширину контейнера */
+    height: 160px; /* Высота в четыре раза больше, чем у select */
+    font-size: 16px; /* Размер шрифта */
+    color: black; /* Цвет текста */
+    background-color: #fff; /* Белый фон */
+    border: 1px solid #ccc; /* Серая граница */
+}
+
+/* Стили для кнопки "Submit Review" */
+.reviews-container button {
+    width: 100%; /* Ширина на всю доступную ширину контейнера */
+    height: 40px; /* Высота, равная select */
+    font-size: 16px; /* Размер шрифта, равный select */
+    color: black; /* Цвет текста */
+    background-color: gold; /* Золотой фон */
+    border: none; /* Без рамки */
+    cursor: pointer; /* Курсор в виде указателя при наведении */
+    transition: background-color 0.3s; /* Плавный переход цвета фона */
+}
+
+.reviews-container button:hover {
+    background-color: #d4af37; /* Темно-золотой цвет при наведении */
+}
+
+/* Стили для меток в форме отзывов */
+.label-rating, .label-comment {
+    font-size: 16px; /* Увеличенный размер шрифта для меток */
 }

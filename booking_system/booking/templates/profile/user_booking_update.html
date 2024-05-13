@@ -8,9 +8,8 @@
         {{ form.as_p }}<br>
         <button type="submit" class="form-button">Save Changes</button>
     </form>
+    {% if error_message %}
+    <p style="color: red; text-align: center;">{{ error_message }}</p>
+    {% endif %}
 </div>
-
-{% if error_message %}
-<script src="../static/js/profile/user_update.js"></script>
-{% endif %}
 {% endblock %}

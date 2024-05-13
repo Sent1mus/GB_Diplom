@@ -2,7 +2,7 @@ function confirmDelete(e, element) {
 e.preventDefault();
 var bookingId = element.getAttribute('data-id');
 if (confirm('Are you sure you want to delete this booking?')) {
-    fetch(`/profile/booking/delete/${bookingId}/`, {  // Added trailing slash here
+    fetch(`/profile/booking/delete/${bookingId}/`, {
         method: 'POST',
         headers: {
             'X-CSRFToken': getCookie('csrftoken')
@@ -16,7 +16,7 @@ if (confirm('Are you sure you want to delete this booking?')) {
     })
     .then(data => {
         alert('Booking deleted successfully');
-        window.location.reload();  // Reload the page or remove the element from DOM
+        window.location.reload();
     })
     .catch(error => console.error('Error:', error));
 }

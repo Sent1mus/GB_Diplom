@@ -6,12 +6,10 @@ from ..models import *
 from ..views import *
 
 
-# Main Page View
 def main_page(request):
     return render(request, 'main.html')
 
 
-# About Us Page View
 def about_us(request):
     return render(request, 'about_us.html')
 
@@ -52,7 +50,7 @@ class BookingValidator:
         return not overlapping_bookings
 
 
-def list_all_db(request):
+def temp_list_all_db(request):
     context = {
         'customers': get_customers(),
         'administrators': get_administrators(),
@@ -61,4 +59,4 @@ def list_all_db(request):
         'reviews': get_reviews(),
         'bookings': get_bookings()
     }
-    return render(request, 'list_all_db.html', context)
+    return render(request, 'temp_list_all_db.html', context)

@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="review-form">
-    <h1>Оставить отзыв</h1>
-    <form method="post" action="{% url 'add_review' booking_id %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit Review</button>
-    </form>
+<div class="reviews-container">
+    <div class="review-form">
+        <h1>Leave review</h1>
+        <form method="post" action="{% url 'add_review' booking_id %}">
+            {% csrf_token %}
+            <span class="label-rating">Rating:</span> <br><br>{{ form.rating }}<br><br><br>
+            <span class="label-comment">Write down your comment:</span><br><br>{{ form.comment }}<br><br><br>
+            <button type="submit" class="form-control">Submit Review</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

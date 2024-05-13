@@ -48,7 +48,6 @@ def change_user_password(request):
             update_session_auth_hash(request, user)
             return JsonResponse({'success': True})
         else:
-            print(form.errors)  # Log form errors to the console
             return JsonResponse({'success': False, 'errors': form.errors})
 
 

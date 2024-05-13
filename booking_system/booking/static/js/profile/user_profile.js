@@ -107,21 +107,22 @@ function changePassword() {
 function deactivateProfile() {
     let csrfToken = getCSRFToken();
     let deactivateProfileUrl = document.getElementById('data-container').getAttribute('data-deactivate-profile-url');
-
-    fetch(deactivateProfileUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': csrfToken
-        }
-    }).then(response => {
-        if (response.ok) {
-            window.location.href = "/logout/";
-        } else {
-            alert('Ошибка при удалении профиля');
-        }
-    }).catch(error => {
-        console.error('Error:', error);
-        alert('Произошла ошибка при обработке вашего запроса.');
-    });
+    if (window.confirm('Are you sure you want to delete your profile?')) {
+        fetch(deactivateProfileUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            }
+        }).then(response => {
+            if (response.ok) {
+                window.location.href = "/logout/";
+            } else {
+                alert('Ошибка при удалении профиля');
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+            alert('Произошла ошибка при обработке вашего запроса.');
+        });
+    }
 }

@@ -23,7 +23,7 @@ def list_booking(request):
 @login_required
 def user_booking_update(request, pk):
     booking = get_object_or_404(Booking, pk=pk)
-    error_message = None  # Initialize an error message variable
+    error_message = None
 
     if request.method == 'POST':
         form = BookingDateTimeForm(request.POST)
@@ -35,6 +35,8 @@ def user_booking_update(request, pk):
                 return redirect('list_booking')
             else:
                 error_message = "This time slot is not available. Please choose another time."
+
+                print('tyt1')
         return render(request, 'profile/user_booking_update.html', {'form': form, 'error_message': error_message})
     else:
         form = BookingDateTimeForm(initial={
@@ -42,7 +44,9 @@ def user_booking_update(request, pk):
             'day': booking.appointment_datetime.day,
             'hour': booking.appointment_datetime.hour,
         })
-    return render(request, 'profile/user_booking_update.html', {'form': form})
+        print('tyt2')
+    return render(request, 'profile/user_booking_update.html', {'form': form, 'error_message': error_message})
+
 
 @login_required
 def user_booking_delete(request, pk):

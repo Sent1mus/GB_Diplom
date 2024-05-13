@@ -7,7 +7,7 @@
         {% for review in reviews %}
         <tr>
             <th>Rating</th>
-            <th><strong>Comment by User: {{ review.booking.customer.user.username }}</strong><br></th>
+            <th><strong>Comment by: {{ review.booking.customer.user.username }}</strong><br></th>
         </tr>
 
         <tr>

@@ -8,6 +8,7 @@ from ..forms import CustomPasswordChangeForm
 import json
 
 
+# View for displaying user profile
 @login_required
 def user_profile(request):
     customer = Customer.objects.get(user=request.user)
@@ -17,6 +18,7 @@ def user_profile(request):
     })
 
 
+# View for updating user profile fields
 @login_required
 @csrf_exempt
 def update_profile(request):
@@ -37,6 +39,7 @@ def update_profile(request):
     return JsonResponse({'success': False})
 
 
+# View for changing user password
 @login_required
 @csrf_exempt
 def change_user_password(request):
@@ -45,12 +48,13 @@ def change_user_password(request):
         form = CustomPasswordChangeForm(user=request.user, data=data)
         if form.is_valid():
             user = form.save()
-            update_session_auth_hash(request, user)
+            update_session_auth_hash(request, user)  # Update session to prevent logout
             return JsonResponse({'success': True})
         else:
             return JsonResponse({'success': False, 'errors': form.errors})
 
 
+# View for deactivating a user profile
 @login_required
 @csrf_exempt
 def deactivate_user_profile(request):

@@ -4,32 +4,17 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from .models import *
 
 
+# Form for user registration
 class RegisterForm(UserCreationForm):
-    first_name = forms.CharField(
-        max_length=30,
-        required=True,
-        widget=forms.TextInput(attrs={'placeholder': 'First Name'})
-    )
-    last_name = forms.CharField(
-        max_length=30,
-        required=True,
-        widget=forms.TextInput(attrs={'placeholder': 'Last Name'})
-    )
-    email = forms.EmailField(
-        max_length=75,
-        required=True,
-        widget=forms.EmailInput(attrs={'placeholder': 'Email'})
-    )
-    phone = forms.CharField(
-        max_length=20,
-        required=True,
-        widget=forms.TextInput(attrs={'placeholder': 'Phone Number'})
-    )
-    birth_date = forms.DateField(
-        required=True,
-        input_formats=['%d.%m.%Y'],
-        widget=forms.DateInput(format='%d.%m.%Y', attrs={'placeholder': 'DD.MM.YYYY'})
-    )
+    # Define form fields with placeholders
+    first_name = forms.CharField(max_length=30, required=True,
+                                 widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
+    last_name = forms.CharField(max_length=30, required=True,
+                                widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
+    email = forms.EmailField(max_length=75, required=True, widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
+    phone = forms.CharField(max_length=20, required=True, widget=forms.TextInput(attrs={'placeholder': 'Phone Number'}))
+    birth_date = forms.DateField(required=True, input_formats=['%d.%m.%Y'],
+                                 widget=forms.DateInput(format='%d.%m.%Y', attrs={'placeholder': 'DD.MM.YYYY'}))
 
     class Meta:
         model = User
@@ -37,6 +22,7 @@ class RegisterForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)
+        # Update placeholders for username and password fields
         self.fields['username'].widget.attrs.update({'placeholder': 'Username'})
         self.fields['password1'].widget.attrs.update({'placeholder': 'Password'})
         self.fields['password2'].widget.attrs.update({'placeholder': 'Confirm Password'})
@@ -48,14 +34,13 @@ class RegisterForm(UserCreationForm):
         user.email = self.cleaned_data['email']
         if commit:
             user.save()
-            Customer.objects.create(
-                user=user,
-                phone=self.cleaned_data['phone'],
-                birth_date=self.cleaned_data['birth_date']
-            )
+            # Create a customer profile linked to the user
+            Customer.objects.create(user=user, phone=self.cleaned_data['phone'],
+                                    birth_date=self.cleaned_data['birth_date'])
         return user
 
 
+# Form for editing user profile
 class EditProfileForm(forms.ModelForm):
     email = forms.EmailField(required=True)
 
@@ -65,6 +50,7 @@ class EditProfileForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(EditProfileForm, self).__init__(*args, **kwargs)
+        # Initialize email field with user's current email
         self.fields['email'].initial = self.instance.user.email
 
     def save(self, commit=True):
@@ -76,39 +62,41 @@ class EditProfileForm(forms.ModelForm):
         return instance
 
 
+# Custom form for changing password
 class CustomPasswordChangeForm(PasswordChangeForm):
     class Meta:
         model = User
         fields = ('old_password', 'new_password1', 'new_password2')
 
 
+# Custom field for displaying model choice fields
 class CustomModelChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, obj):
         return f"{obj.user.first_name} {obj.user.last_name} - {obj.specialization}"
 
 
+# Form for selecting a service provider
 class ServiceProviderForm(forms.Form):
-    service_provider = CustomModelChoiceField(
-        queryset=ServiceProvider.objects.all(),
-        widget=forms.Select(attrs={'id': 'service_provider'}),
-        label="Select master"
-    )
+    service_provider = CustomModelChoiceField(queryset=ServiceProvider.objects.all(),
+                                              widget=forms.Select(attrs={'id': 'service_provider'}),
+                                              label="Select master")
 
 
+# Form for booking date and time
 class BookingDateTimeForm(forms.Form):
     current_year = timezone.now().year
     current_month = timezone.now().month
     current_day = timezone.now().day
     current_hour = timezone.now().hour
 
-    # Adjust month choices
+    # Adjust month choices based on current month
     if current_month == 12:
         month_choices = [(12, 'December'), (1, 'January')]
     else:
         month_choices = [(current_month, calendar.month_name[current_month]),
                          (current_month + 1, calendar.month_name[current_month + 1])]
 
-    # Fields
+    # Define fields for month, day, and hour selection
     month = forms.ChoiceField(choices=month_choices, initial=current_month)
     day = forms.ChoiceField(choices=[(i, i) for i in range(1, calendar.monthrange(current_year, current_month)[1] + 1)],
                             initial=current_day)
@@ -125,6 +113,7 @@ class BookingDateTimeForm(forms.Form):
 
         if month and day and hour:
             try:
+                # Validate and create datetime object
                 cleaned_data['appointment_datetime'] = timezone.datetime(year, int(month), int(day), int(hour), minute,
                                                                          tzinfo=timezone.get_current_timezone())
             except ValueError as e:
@@ -135,6 +124,7 @@ class BookingDateTimeForm(forms.Form):
         return cleaned_data
 
 
+# Form for submitting reviews
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review

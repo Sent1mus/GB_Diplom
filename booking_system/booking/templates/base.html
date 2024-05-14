@@ -10,7 +10,7 @@
 <header>
     <nav class="nav-container">
         <ul class="navlist">
-            <li><a href="{% url 'about_us' %}" class="nav-link">ABOUT</a></li>
+            <li><a href="{% url 'about_us' %}" class="nav-link">ABOUT US</a></li>
             <li><a href="{% url 'services' %}" class="nav-link">SERVICES</a></li>
             <li><a href="{% url 'main' %}" class="nav-link"><img src="{% static 'images/main_logo.png' %}"alt="Logo"></a></li>
             {% if request.user.is_authenticated %}

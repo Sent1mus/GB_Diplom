@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="all-bookings-container">
+    <h1>All Bookings</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Customer</th>
+                <th>Service Provider</th>
+                <th>Appointment Date and Time</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.service.name }}</td>
+                <td>{{ booking.customer.user.username }}</td>
+                <td>{{ booking.service_provider.user.username }}</td>
+                <td>{{ booking.appointment_datetime|date:"Y-m-d H:i" }}</td>
+                <td>
+                    <a href="{% url 'admin_booking_update' booking.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'admin_booking_delete' booking.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No bookings found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

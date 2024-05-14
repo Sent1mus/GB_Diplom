@@ -82,6 +82,11 @@ class ServiceProviderForm(forms.Form):
                                               label="Select master")
 
 
+# Form for selecting a service
+class ServiceForm(forms.Form):
+    service = forms.ModelChoiceField(queryset=Service.objects.all(), label="Select Service")
+
+
 # Form for booking date and time
 class BookingDateTimeForm(forms.Form):
     current_year = timezone.now().year

@@ -1,0 +1,25 @@
+<!-- templates/profile/manager_profile.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="manager-profile-container">
+    <h1>Manager Profile</h1>
+    <div class="profile-section">
+        <div class="profile-row">
+            <div class="profile-column">
+                <span>Email: </span>
+                <span>{{ manager.user.email }}</span>
+            </div>
+        </div>
+        <div class="profile-row">
+            <div class="profile-column">
+                <span>Phone: </span>
+                <span>{{ manager.phone }}</span>
+            </div>
+        </div>
+        <div class="profile-button-row">
+            <a href="{% url 'all_bookings' %}" class="link-as-button">View All Bookings</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

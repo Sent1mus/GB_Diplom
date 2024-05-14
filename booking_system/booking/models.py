@@ -24,6 +24,10 @@ class Administrator(BaseProfile):
     pass
 
 
+class Manager(BaseProfile):
+    pass
+
+
 class ServiceProvider(BaseProfile):
     specialization = models.CharField(max_length=100)
     service = models.ManyToManyField('Service')

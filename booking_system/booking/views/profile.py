@@ -3,9 +3,16 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
-from ..models import Customer
+from ..models import Manager, ServiceProvider, Customer
 from ..forms import CustomPasswordChangeForm
 import json
+
+
+# View for displaying manager profile
+@login_required
+def manager_profile(request):
+    manager = Manager.objects.get(user=request.user)
+    return render(request, 'profile/manager_profile.html', {'manager': manager})
 
 
 # View for displaying user profile

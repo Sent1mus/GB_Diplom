@@ -7,7 +7,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Number of customers to create
-        num_customers = 5  # You can change this number as needed
+        num_customers = 5
 
         for i in range(num_customers):
             # Create a user for each customer
@@ -15,7 +15,7 @@ class Command(BaseCommand):
             first_name = f'First{i}'
             last_name = f'Last{i}'
             email = f'user{i}@example.com'
-            password = 'password'  # You might want to generate a more secure password
+            password = 'password'
             phone = f'7927333222{i}'
             birth_date = f'200{i}-01-0{i+1}'
 

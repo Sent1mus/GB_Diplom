@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.core.management import call_command
 
+
 class Command(BaseCommand):
     help = 'Run migrations and all fill scripts for customers, administrators, and service providers'
 
@@ -23,12 +24,17 @@ class Command(BaseCommand):
         call_command('fill_administrators')
         self.stdout.write(self.style.SUCCESS('Finished filling administrators.'))
 
-        # Call fill_serviceproviders command
+        # Call fill_managers command
+        self.stdout.write(self.style.SUCCESS('Starting to fill managers...'))
+        call_command('fill_managers')
+        self.stdout.write(self.style.SUCCESS('Finished filling managers.'))
+
+        # Call fill_service_providers command
         self.stdout.write(self.style.SUCCESS('Starting to fill service providers...'))
         call_command('fill_service_providers')
         self.stdout.write(self.style.SUCCESS('Finished filling service providers.'))
 
-        # Call fill_serviceproviders command
+        # Call fill_services command
         self.stdout.write(self.style.SUCCESS('Starting to fill services...'))
         call_command('fill_services')
         self.stdout.write(self.style.SUCCESS('Finished filling services.'))

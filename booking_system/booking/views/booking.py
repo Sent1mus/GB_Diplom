@@ -1,11 +1,65 @@
 from django.http import JsonResponse
-from django.shortcuts import render, redirect, get_object_or_404
-
-from . import BookingValidator
-from ..forms import BookingDateTimeForm
-from ..models import Booking, Customer
-from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.shortcuts import render, redirect, get_object_or_404
+from . import BookingValidator
+from ..forms import BookingDateTimeForm, ServiceProviderForm, ServiceForm
+from ..models import Booking, Customer
+
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def all_bookings(request):
+    bookings = Booking.objects.all()
+    return render(request, 'profile/all_bookings.html', {'bookings': bookings})
+
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def admin_booking_update(request, pk):
+    booking = get_object_or_404(Booking, pk=pk)
+    if request.method == 'POST':
+        form = BookingDateTimeForm(request.POST)
+        provider_form = ServiceProviderForm(request.POST)
+        service_form = ServiceForm(request.POST)
+        if form.is_valid() and provider_form.is_valid() and service_form.is_valid():
+            new_appointment_datetime = form.cleaned_data['appointment_datetime']
+            new_service_provider = provider_form.cleaned_data['service_provider']
+            new_service = service_form.cleaned_data['service']
+
+            # Check if the selected time slot is available
+            if BookingValidator.is_slot_available(new_service_provider.id, new_appointment_datetime):
+                booking.appointment_datetime = new_appointment_datetime
+                booking.service_provider = new_service_provider
+                booking.service = new_service
+                booking.save()
+                return redirect('all_bookings')
+            else:
+                messages.error(request, "This time slot is not available. Please choose another time.")
+    else:
+        form = BookingDateTimeForm(initial={
+            'month': booking.appointment_datetime.month,
+            'day': booking.appointment_datetime.day,
+            'hour': booking.appointment_datetime.hour,
+        })
+        provider_form = ServiceProviderForm(initial={'service_provider': booking.service_provider})
+        service_form = ServiceForm(initial={'service': booking.service})
+    return render(request, 'profile/admin_booking_update.html', {
+        'form': form,
+        'provider_form': provider_form,
+        'service_form': service_form
+    })
+
+
+@login_required
+@user_passes_test(lambda u: u.is_staff)
+def admin_booking_delete(request, pk):
+    booking = get_object_or_404(Booking, pk=pk)
+    if request.method == 'POST':
+        booking.delete()
+        return redirect('all_bookings')
+    return render(request, 'profile/admin_booking_delete.html', {'booking': booking})
 
 
 @login_required

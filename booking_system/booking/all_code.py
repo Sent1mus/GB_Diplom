@@ -1,3 +1,10 @@
+#full_path_to_project\Project\requirements.txt
+asgiref==3.8.1
+chardet==5.2.0
+Django==5.0.4
+sqlparse==0.5.0
+tzdata==2024.1
+
 # templates\profile\user_booking_update.html
 {% extends 'base.html' %}
 
@@ -1545,39 +1552,6 @@ Welcome to Beauty Saloon
         praesent tristique magna sit amet purus gravida. Pellentesque id nibh tortor id aliquet lectus proin nibh.
         Suspendisse ultrices gravida dictum fusce ut. Sed lectus vestibulum mattis ullamcorper velit sed ullamcorper
         morbi tincidunt. Feugiat pretium nibh ipsum consequat nisl vel.</p>
-
-    <p>Gravida quis blandit turpis cursus in hac habitasse platea dictumst. Dictum varius duis at consectetur lorem
-        donec. Cras sed felis eget velit. Faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis
-        aliquam. Eget velit aliquet sagittis id. Vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant
-        morbi tristique. Nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit. In pellentesque massa placerat
-        duis ultricies. Auctor neque vitae tempus quam pellentesque nec nam aliquam. Nulla malesuada pellentesque elit
-        eget gravida cum sociis natoque. Velit sed ullamcorper morbi tincidunt ornare massa. Eu tincidunt tortor aliquam
-        nulla facilisi cras. Sed blandit libero volutpat sed cras ornare arcu dui.</p>
-
-    <p>Habitasse platea dictumst quisque sagittis purus. Urna neque viverra justo nec ultrices dui sapien eget. Dis
-        parturient montes nascetur ridiculus. Faucibus turpis in eu mi. Enim eu turpis egestas pretium aenean pharetra
-        magna ac placerat. Vitae elementum curabitur vitae nunc sed velit dignissim sodales ut. Ornare aenean euismod
-        elementum nisi quis eleifend. Libero volutpat sed cras ornare arcu dui vivamus. Mi ipsum faucibus vitae aliquet
-        nec ullamcorper sit. Purus gravida quis blandit turpis cursus in hac. Porttitor lacus luctus accumsan tortor
-        posuere ac ut consequat. Eu sem integer vitae justo eget magna fermentum iaculis.</p>
-    <p>Penatibus et magnis dis parturient. Dui nunc mattis enim ut tellus elementum sagittis vitae et. Augue eget arcu
-        dictum varius duis at consectetur lorem donec. Ut venenatis tellus in metus. Ultricies lacus sed turpis
-        tincidunt. Arcu bibendum at varius vel pharetra vel turpis nunc. Ipsum dolor sit amet consectetur adipiscing
-        elit duis tristique sollicitudin. Pulvinar pellentesque habitant morbi tristique senectus et netus et malesuada.
-        Id porta nibh venenatis cras. Proin nibh nisl condimentum id. Viverra maecenas accumsan lacus vel facilisis. Nec
-        nam aliquam sem et tortor consequat id. Cras ornare arcu dui vivamus arcu felis. Diam maecenas ultricies mi eget
-        mauris pharetra et. Venenatis tellus in metus vulputate. Nunc faucibus a pellentesque sit amet porttitor eget.
-        Fermentum et sollicitudin ac orci phasellus egestas tellus.</p>
-
-    <p>Sit amet massa vitae tortor condimentum. Porttitor eget dolor morbi non. Fringilla urna porttitor rhoncus dolor.
-        At urna condimentum mattis pellentesque id. Quisque sagittis purus sit amet volutpat consequat mauris nunc
-        congue. Dictum non consectetur a erat. Sapien et ligula ullamcorper malesuada proin libero. Aliquam malesuada
-        bibendum arcu vitae elementum curabitur vitae nunc sed. Amet risus nullam eget felis. Diam quis enim lobortis
-        scelerisque fermentum dui faucibus. At ultrices mi tempus imperdiet. Id donec ultrices tincidunt arcu non
-        sodales neque sodales ut. Risus commodo viverra maecenas accumsan. Tristique risus nec feugiat in fermentum
-        posuere urna nec. Pellentesque eu tincidunt tortor aliquam nulla facilisi cras fermentum odio. Augue interdum
-        velit euismod in. Tristique risus nec feugiat in fermentum posuere urna. Augue mauris augue neque gravida. Justo
-        donec enim diam vulputate ut pharetra sit amet aliquam. Sit amet porttitor eget dolor.</p>
 </div>
 {% endblock %}
 
@@ -2498,39 +2472,6 @@ class Command(BaseCommand):
         praesent tristique magna sit amet purus gravida. Pellentesque id nibh tortor id aliquet lectus proin nibh.
         Suspendisse ultrices gravida dictum fusce ut. Sed lectus vestibulum mattis ullamcorper velit sed ullamcorper
         morbi tincidunt. Feugiat pretium nibh ipsum consequat nisl vel.</p>
-
-        <p>Gravida quis blandit turpis cursus in hac habitasse platea dictumst. Dictum varius duis at consectetur lorem
-        donec. Cras sed felis eget velit. Faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis
-        aliquam. Eget velit aliquet sagittis id. Vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant
-        morbi tristique. Nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit. In pellentesque massa placerat
-        duis ultricies. Auctor neque vitae tempus quam pellentesque nec nam aliquam. Nulla malesuada pellentesque elit
-        eget gravida cum sociis natoque. Velit sed ullamcorper morbi tincidunt ornare massa. Eu tincidunt tortor aliquam
-        nulla facilisi cras. Sed blandit libero volutpat sed cras ornare arcu dui.</p>
-
-        <p>Habitasse platea dictumst quisque sagittis purus. Urna neque viverra justo nec ultrices dui sapien eget. Dis
-        parturient montes nascetur ridiculus. Faucibus turpis in eu mi. Enim eu turpis egestas pretium aenean pharetra
-        magna ac placerat. Vitae elementum curabitur vitae nunc sed velit dignissim sodales ut. Ornare aenean euismod
-        elementum nisi quis eleifend. Libero volutpat sed cras ornare arcu dui vivamus. Mi ipsum faucibus vitae aliquet
-        nec ullamcorper sit. Purus gravida quis blandit turpis cursus in hac. Porttitor lacus luctus accumsan tortor
-        posuere ac ut consequat. Eu sem integer vitae justo eget magna fermentum iaculis.</p>
-        <p>Penatibus et magnis dis parturient. Dui nunc mattis enim ut tellus elementum sagittis vitae et. Augue eget arcu
-        dictum varius duis at consectetur lorem donec. Ut venenatis tellus in metus. Ultricies lacus sed turpis
-        tincidunt. Arcu bibendum at varius vel pharetra vel turpis nunc. Ipsum dolor sit amet consectetur adipiscing
-        elit duis tristique sollicitudin. Pulvinar pellentesque habitant morbi tristique senectus et netus et malesuada.
-        Id porta nibh venenatis cras. Proin nibh nisl condimentum id. Viverra maecenas accumsan lacus vel facilisis. Nec
-        nam aliquam sem et tortor consequat id. Cras ornare arcu dui vivamus arcu felis. Diam maecenas ultricies mi eget
-        mauris pharetra et. Venenatis tellus in metus vulputate. Nunc faucibus a pellentesque sit amet porttitor eget.
-        Fermentum et sollicitudin ac orci phasellus egestas tellus.</p>
-
-        <p>Sit amet massa vitae tortor condimentum. Porttitor eget dolor morbi non. Fringilla urna porttitor rhoncus dolor.
-        At urna condimentum mattis pellentesque id. Quisque sagittis purus sit amet volutpat consequat mauris nunc
-        congue. Dictum non consectetur a erat. Sapien et ligula ullamcorper malesuada proin libero. Aliquam malesuada
-        bibendum arcu vitae elementum curabitur vitae nunc sed. Amet risus nullam eget felis. Diam quis enim lobortis
-        scelerisque fermentum dui faucibus. At ultrices mi tempus imperdiet. Id donec ultrices tincidunt arcu non
-        sodales neque sodales ut. Risus commodo viverra maecenas accumsan. Tristique risus nec feugiat in fermentum
-        posuere urna nec. Pellentesque eu tincidunt tortor aliquam nulla facilisi cras fermentum odio. Augue interdum
-        velit euismod in. Tristique risus nec feugiat in fermentum posuere urna. Augue mauris augue neque gravida. Justo
-        donec enim diam vulputate ut pharetra sit amet aliquam. Sit amet porttitor eget dolor.</p>
 </div>
 {% endblock %}
 

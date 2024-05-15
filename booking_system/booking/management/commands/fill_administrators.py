@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from booking.models import Administrator
 
+
 class Command(BaseCommand):
     help = 'Fills the Administrator database with dummy data'
 
@@ -10,16 +11,16 @@ class Command(BaseCommand):
         num_administrators = 3
 
         for i in range(num_administrators):
-            # Create a user for each administrator
+            # Create a superuser for each administrator
             username = f'admin{i}'
             first_name = f'AdminFirst{i}'
             last_name = f'AdminLast{i}'
             email = f'admin{i}@example.com'
             password = 'password'
             phone = f'7927333111{i}'
-            birth_date = f'200{i}-01-0{i+1}'
+            birth_date = f'200{i}-01-0{i + 1}'
 
-            user = User.objects.create_user(
+            user = User.objects.create_superuser(
                 username=username,
                 password=password,
                 email=email,
@@ -27,6 +28,7 @@ class Command(BaseCommand):
                 last_name=last_name
             )
             user.is_staff = True  # Mark the user as staff
+            user.is_superuser = True  # Mark the user as superuser
             user.save()
 
             Administrator.objects.create(

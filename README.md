@@ -11,10 +11,10 @@
 - **DIPLOM FINAL regular.docx** - дипломная работа с полным кодом на белом фоне.
 - **DIPLOM FINAL regular.pdf** - дипломная работа в формате pdf.
 
-### Ссылка на проект, запущенный на сервере
+### Project was posted on this website till August 2024
 [https://sent1mus.pythonanywhere.com/](https://sent1mus.pythonanywhere.com/)
 
-На сервере плохо работает admin panel, так как стили Django не загружены.
+Admin panel is in development. 
 
 ### База данных
 База данных заполнена fake данными.
